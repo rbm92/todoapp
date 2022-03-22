@@ -1,80 +1,40 @@
 <template>
-  <div>
-    <div class="bg-gray-100">
-      <nav
-        class="
-          container
-          px-6
-          py-8
-          mx-auto
-          md:flex md:justify-evenly md:items-center
-        "
-      >
-        <div class="flex items-center justify-between">
-          <router-link
-            to="/"
-            class="
-              text-xl
-              font-bold
-              text-gray-800
-              md:text-2xl
-              hover:text-blue-400
-            "
-            ><img class="w-20" src="../assets/todo-app.png" alt="todo logo">
-          </router-link>
-          <!-- Mobile menu button -->
-          <div @click="showMenu = !showMenu" class="flex md:hidden">
-            <button
-              type="button"
-              class="
-                text-gray-800
-                hover:text-gray-400
-                focus:outline-none focus:text-gray-400
-              "
-            >
-              <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
-                <path
-                  fill-rule="evenodd"
-                  d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-                ></path>
-              </svg>
-            </button>
-          </div>
-        </div>
+  <header class="bg-green-300">
+    <nav class="p-10 flex flex-col gap-5 items-center sm:flex-row">
+      <a href="/" class="flex items-center gap-5">
+        <img
+          class="w-20 bg-green-300"
+          src="../assets/todo-app.png"
+          alt="logo"
+        />
+        <h1 class="text-lg">Todo App</h1>
+      </a>
+      <ul class="flex flex-1 justify-end gap-10">
+        <router-link v-if="!user" class="cursor-pointer" to="/auth">Sign In</router-link>
 
-
-        <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-        <ul
-          :class="showMenu ? 'flex' : 'hidden'"
-          class="
-            flex-col
-            mt-8
-            space-y-4
-            md:flex
-            md:space-y-0
-            md:flex-row
-            md:items-center
-            md:space-x-10
-            md:mt-0
-          "
-        >
-          <li class="text-sm font-bold text-gray-800 hover:text-blue-400">
-            Home
-          </li>
-          <li class="text-sm font-bold text-gray-800 hover:text-blue-400">
-            Auth
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+        <li v-else @click="signOut" class="cursor-pointer">Sign Out</li>
+      </ul>
+    </nav>
+  </header>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      showMenu: false,
-    };
-  },
-};
+
+<script setup>
+import { supabase } from "../supabase";
+import { useRouter } from "vue-router";
+import { useUserStore } from "../store/user";
+import { computed } from "vue";
+
+// Get user from store
+const user = computed(()=>useUserStore().$state.user);
+
+// Setup ref to router
+const redirect = useRouter();
+
+// Logout function
+async function signOut() {
+  await useUserStore().signOut();
+  redirect.push({ path: "/auth" });
+}
 </script>
+
+<style></style>

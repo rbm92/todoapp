@@ -1,17 +1,21 @@
 import { defineStore } from "pinia";
 import { supabase } from "../supabase";
+// import { router } from 'vue-router';
 
 export const useUserStore = defineStore("user", {
     state: () => ({
         user: null,
     }),
+
     actions: {
+        // setUser(payload) {
+        //     state.user = payload ? payload.user : null;
+        // },
         async fetchUser() {
             const user = await supabase.auth.user();
             this.user = user;
         },
         async signUp(email, password) {
-            console.log("asdfasdfasdf");
             const { user, error } = await supabase.auth.signUp({
                 email: email,
                 password: password,
@@ -19,11 +23,23 @@ export const useUserStore = defineStore("user", {
             if (error) throw error;
             if (user) {
                 this.user = user;
-                console.log(this.user);
+                // console.log(this.user);
             }
         },
-        signIn(){},
-        signOut(){},
+        async signIn(email, password) {
+            const { user, error } = await supabase.auth.signIn({
+                email: email,
+                password: password,
+            });
+            if (error) throw error;
+            if (user) {
+                this.user = user;
+                // console.log(this.user);
+            }
+        },
+        async signOut() {
+            const { user, error } = await supabase.auth.signOut()
+        },
         persist: {
             enabled: true,
             strategies: [
