@@ -24,7 +24,8 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, defineEmits } from "vue";
+import { ref, reactive, computed } from "vue";
+import { useTaskStore } from "../store/task";
 
 const emit = defineEmits(["childAddTodo"]);
 

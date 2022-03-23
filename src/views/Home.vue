@@ -4,6 +4,7 @@
     <h1 class="text-3xl font-bold mt-10 ml-10">My Todo App</h1>
     <!-- Adding a new task -->
     <NewTask @childAddTodo="addTodo" />
+    <h2 class="text-2xl font-bold mt-10 ml-10">List of Tasks</h2>
     <!-- Buttons controlling all tasks -->
     <div class="flex gap-5 mt-5 ml-10">
       <button
@@ -25,9 +26,6 @@
         Remove All
       </button>
     </div>
-    <h2 class="text-2xl font-bold mt-10 ml-10">List of Tasks</h2>
-    <!-- <h2 class="text-2xl font-bold mt-5 ml-10">Pending Tasks</h2> -->
-    <!-- List of pending tasks -->
     <ul>
       <li>
         <TaskItem
@@ -46,6 +44,7 @@
 import { ref, reactive, computed } from "vue";
 import NewTask from "../components/NewTask.vue";
 import TaskItem from "../components/TaskItem.vue";
+import { useTaskStore } from "../store/task";
 
 // Array of tasks (examples)
 let tasks = reactive([
@@ -75,11 +74,13 @@ let errorInput = ref(""); // error message variable
 //   empty.value = true;
 // }
 
-function addTodo(newTodo) {
-  tasks.push({
-    title: newTodo,
-    completed: false,
-  }); // saves input to pending
+async function addTodo(newTodo) {
+  // tasks.push({
+  //   title: newTodo,
+  //   completed: false,
+  // }); // saves input to pending
+
+  await useTaskStore().addTask(newTodo.value);
 }
 
 function toggleTodo(item) {

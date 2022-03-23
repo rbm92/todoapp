@@ -68,22 +68,6 @@ const email = ref(null);
 const password = ref(null);
 const errorMsg = ref(null);
 
-// SignIn function
-// async function signIn() {
-//   try {
-//     const { error } = await supabase.auth.signIn({
-//       email: email.value,
-//       password: password.value,
-//     });
-//     if (error) throw error;
-//     redirect.push({ path: "/" });
-//   } catch (error) {
-//     errorMsg.value = `Error: ${error.message}`;
-//     setTimeout(() => {
-//       errorMsg.value = null;
-//     }, 5000);
-//   }
-// }
 
 async function signIn() {
   try {

@@ -79,31 +79,6 @@ const password = ref(null);
 const confirmPassword = ref(null);
 const errorMsg = ref(null);
 
-// SignUp Function
-// async function signUp() {
-//   console.log("hello");
-//   if (password.value === confirmPassword.value) {
-//     try {
-//       const { error } = await supabase.auth.signUp({
-//         email: email.value,
-//         password: password.value,
-//       });
-//       if (error) throw error;
-//       redirect.push({ path: "/auth" });
-//     } catch (error) {
-//       errorMsg.value = error.message;
-//       setTimeout(() => {
-//         errorMsg.value = null;
-//       }, 5000);
-//     }
-//     return;
-//   }
-//   errorMsg.value = "Passwords do not match";
-//   setTimeout(() => {
-//     errorMsg.value = null;
-//   }, 5000);
-// }
-
 async function signUp() {
   if (password.value === confirmPassword.value) {
     try {

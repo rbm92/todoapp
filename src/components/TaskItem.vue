@@ -50,7 +50,8 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, defineEmits, defineProps } from "vue";
+import { ref, reactive, computed } from "vue";
+import { useTaskStore } from "../store/task";
 
 // Error Handling variables
 let empty = ref(false); // for editing a task
@@ -61,11 +62,10 @@ let editTodo = ref(""); // value from edit dialog
 let editDialog = ref(false); // initially hidden
 let currentIndex = ref(""); // used to show only 1 dialog
 
-let taskDone = true;
+let taskDone = true; // toggleDone boolean
 
 const emit = defineEmits([
-  "childDone",
-  "childUndone",
+  "childToggle",
   "childRemove",
   "childEdit",
 ]);
@@ -84,11 +84,12 @@ function showEditDialog() {
   editDialog.value = true; // shows edit dialog
 }
 
-// Pending Tasks Functions
+// Toggle Done and Undone
 function toggleTodo() {
   emit("childToggle", props.item); // sends info to parent component
 }
 
+// Edit task
 function edit() {
   if (editTodo.value === "") errHandl();
   // shows error message
@@ -105,6 +106,7 @@ function edit() {
   }
 }
 
+// Remove task
 function remove() {
   emit("childRemove", props.item);
 }
