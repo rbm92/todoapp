@@ -10,7 +10,9 @@
         <h1 class="text-lg">Todo App</h1>
       </a>
       <ul class="flex flex-1 justify-end gap-10">
-        <router-link v-if="!user" class="cursor-pointer" to="/auth">Sign In</router-link>
+        <router-link v-if="!user" class="cursor-pointer" to="/auth"
+          >Sign In</router-link
+        >
 
         <li v-else @click="signOut" class="cursor-pointer">Sign Out</li>
       </ul>
@@ -25,7 +27,7 @@ import { useUserStore } from "../store/user";
 import { computed } from "vue";
 
 // Get user from store
-const user = computed(()=>useUserStore().$state.user);
+const user = computed(() => useUserStore().$state.user);
 
 // Setup ref to router
 const redirect = useRouter();
