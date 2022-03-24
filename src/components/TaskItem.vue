@@ -1,16 +1,16 @@
 <template>
   <!-- Item wrapper -->
   <div class="flex gap-5 items-center my-10 ml-10">
-    <p :class="{ taskDone: item.completed }">{{ item.title }}</p>
+    <p :class="{ taskDone: item.is_complete }">{{ item.title }}</p>
     <button
-      v-if="!item.completed"
+      v-if="!item.is_complete"
       class="btn-template bg-green-400 hover:bg-green-500"
       @click="toggleTodo()"
     >
       Done
     </button>
     <button
-      v-if="item.completed"
+      v-if="item.is_complete"
       class="btn-template bg-indigo-400 hover:bg-indigo-500"
       @click="toggleTodo()"
     >

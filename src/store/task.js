@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { supabase } from "../supabase";
+import { useUserStore } from "./user";
 
 export const useTaskStore = defineStore("tasks", {
     state: () => ({
@@ -12,33 +13,54 @@ export const useTaskStore = defineStore("tasks", {
                 .select("*")
                 .order("id", { ascending: false });
             this.tasks = tasks;
+            return this.tasks;
         },
         // New code
         async addTask(title) {
+            console.log(useUserStore().user.id);
             const { data, error } = await supabase
                 .from('tasks')
                 .insert([
                     {
-                        user_id: '27ce9b17-e568-4977-a8be-744b96d18363',
+                        user_id: useUserStore().user.id,
                         title: title,
                         is_complete: false
                     }
                 ])
         },
-        async editTask(id) {
+        async toggleDone(bool, id) {
             const { data, error } = await supabase
                 .from('tasks')
-                .update({
-                    other_column: 'otherValue'
-                })
-                .eq('some_column', 'someValue')
+                .update({ is_complete: bool })
+                .match({ id: id })
+        },
+        async editTask(title, id) {
+            const { data, error } = await supabase
+                .from('tasks')
+                .update({ title: title })
+                .match({ id: id })
         },
         async deleteTask(id) {
             const { data, error } = await supabase
                 .from('tasks')
                 .delete()
                 .match({ id: id })
-        }
+        },
+        async allDone() {
+            const { data, error } = await supabase
+                .from('tasks')
+                .update({ is_complete: true })
+        },
+        async allUndone() {
+            const { data, error } = await supabase
+                .from('tasks')
+                .update({ is_complete: false })
+        },
+        async removeAll() {
+            const { data, error } = await supabase
+                .from('tasks')
+                .delete()
+        },
     },
 
 });

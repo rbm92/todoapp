@@ -41,76 +41,93 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, onMounted } from "vue";
 import NewTask from "../components/NewTask.vue";
 import TaskItem from "../components/TaskItem.vue";
 import { useTaskStore } from "../store/task";
 
-// Array of tasks (examples)
-let tasks = reactive([
-  {
-    title: "Title 1",
-    completed: false,
-  },
-  {
-    title: "Title 2",
-    completed: true,
-  },
-]);
+// Initialization array of tasks
+let tasks = ref([]);
 
-// Initialization variables
-let editTodo = ref(""); // value from edit dialog
+// Getting tasks from supabase
+async function getTasks() {
+  tasks.value = await useTaskStore().fetchTasks();
+}
+  
+getTasks();
 
-let editDialog = ref(false); // initially hidden
-let currentIndex = ref(""); // used to show only 1 dialog
+// // Initialization variables
+// let editTodo = ref(""); // value from edit dialog
 
-// Error handling
-let emptyNew = ref(false); // for new todo input
-let empty = ref(false); // for editing a task
-let errorInput = ref(""); // error message variable
+// let editDialog = ref(false); // initially hidden
+// let currentIndex = ref(""); // used to show only 1 dialog
 
-// function errHandl() {
-//   errorInput.value = "Field cannot be empty";
-//   empty.value = true;
-// }
+// // Error handling
+// let emptyNew = ref(false); // for new todo input
+// let empty = ref(false); // for editing a task
+// let errorInput = ref(""); // error message variable
+
+// // function errHandl() {
+// //   errorInput.value = "Field cannot be empty";
+// //   empty.value = true;
+// // }
 
 async function addTodo(newTodo) {
-  // tasks.push({
+  // tasks.value.push({
   //   title: newTodo,
   //   completed: false,
   // }); // saves input to pending
 
-  await useTaskStore().addTask(newTodo.value);
+  await useTaskStore().addTask(newTodo);
+  getTasks();
 }
 
-function toggleTodo(item) {
-  const index = tasks.indexOf(item);
-  tasks[index].completed = !tasks[index].completed;
+async function toggleTodo(item) {
+  // const index = tasks.value.indexOf(item);
+  // console.log(item.completed);
+  // tasks.value[index].completed = !tasks.value[index].completed;
+  const toggleComplete = !item.is_complete;
+  const toggleId = item.id 
+  await useTaskStore().toggleDone(toggleComplete, toggleId);
+  getTasks();
 }
 
-function edit(item) {
-  const index = tasks.indexOf(item.oldValue);
-  tasks[index].title = item.newValue;
+async function edit(item) {
+  // const index = tasks.value.indexOf(item.oldValue);
+  // tasks.value[index].title = item.newValue;
+  const newTitle = item.newValue;
+  const editId = item.oldValue.id;
+  console.log(newTitle);
+  console.log(editId);
+  await useTaskStore().editTask(newTitle, editId);
+  getTasks();
 }
 
-function remove(item) {
-  const index = tasks.indexOf(item);
-  tasks.splice(index, 1);
+async function remove(item) {
+  // const index = tasks.value.indexOf(item);
+  // tasks.value.splice(index, 1);
+  await useTaskStore().deleteTask(item.id);
+  getTasks();
 }
 
 // Global Functions
-function markAllDone() {
-  tasks.forEach((task) => (task.completed = true));
-  // pendings.length = 0;
+async function markAllDone() {
+  // tasks.value.forEach((task) => (task.completed = true));
+  console.log(tasks.value);
+  await useTaskStore().allDone();
+  getTasks();
 }
 
-function markAllUndone() {
-  tasks.forEach((task) => (task.completed = false));
-  // completes.length = 0;
+async function markAllUndone() {
+  // tasks.value.forEach((task) => (task.completed = false));
+  await useTaskStore().allUndone();
+  getTasks();
 }
 
-function removeAll() {
-  tasks.length = 0;
+async function removeAll() {
+  // tasks.value.length = 0;
+  await useTaskStore().deleteTask();
+  getTasks();
 }
 </script>
 
