@@ -11,11 +11,27 @@ export const useTaskStore = defineStore("tasks", {
             const { data: tasks } = await supabase
                 .from("tasks")
                 .select("*")
-                .order("id", { ascending: false });
+                .order("is_complete", { ascending: true });
             this.tasks = tasks;
             return this.tasks;
         },
         // New code
+        async filterDone() {
+            const { data: tasks } = await supabase
+                .from("tasks")
+                .select("*")
+                .filter("is_complete", "eq", true);
+            this.tasks = tasks;
+            return this.tasks;
+        },
+        async filterUndone() {
+            const { data: tasks } = await supabase
+                .from("tasks")
+                .select("*")
+                .filter("is_complete", "eq", false);
+            this.tasks = tasks;
+            return this.tasks;
+        },
         async addTask(title) {
             console.log(useUserStore().user.id);
             const { data, error } = await supabase
@@ -50,16 +66,19 @@ export const useTaskStore = defineStore("tasks", {
             const { data, error } = await supabase
                 .from('tasks')
                 .update({ is_complete: true })
+                .match({ is_complete: false })
         },
         async allUndone() {
             const { data, error } = await supabase
                 .from('tasks')
                 .update({ is_complete: false })
+                .match({ is_complete: true })
         },
         async removeAll() {
             const { data, error } = await supabase
                 .from('tasks')
                 .delete()
+                .match({ user_id: useUserStore().user.id })
         },
     },
 

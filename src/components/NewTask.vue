@@ -1,17 +1,18 @@
 <template>
   <!-- Adding a new task -->
-  <form class="" action="">
-    <div class="flex gap-5 items-center mt-5 ml-10">
-      <label for="name">New Todo</label>
+  <form class="m-10 p-5 pb-10 rounded-md bg-gray-100 shadow-lg max-w-xl" action="">
+    <div class="flex gap-5 justify-around items-center mt-5 ml-10">
+      <label class="text-xl" for="name">New Todo</label>
       <input
-        class="border border-gray-400 rounded"
+        class="p-2 pl-12 text-gray-500 rounded bg-icon bg-new"
+        placeholder="What's on your mind?"
         v-model="newTodo"
         type="text"
         name="newTodo"
         id="name"
       />
       <button
-        class="btn-template bg-blue-500 hover:bg-blue-600"
+        class="btn-template bg-blue-500 w-20 hover:bg-blue-600"
         @click.prevent="addTodo"
       >
         Add

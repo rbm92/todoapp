@@ -14,8 +14,9 @@
         <label for="email" class="mb-1 text-sm text-green-500">Email</label>
         <input
           type="text"
+          placeholder="random@names.com"
           required
-          class="p-2 text-gray-500 focus:outline-none"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-email focus:outline-none"
           id="email"
           v-model="email"
         />
@@ -27,7 +28,8 @@
         <input
           type="password"
           required
-          class="p-2 text-gray-500 focus:outline-none"
+          placeholder="avoid1234please"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-pwd focus:outline-none"
           id="password"
           v-model="password"
         />
@@ -39,7 +41,8 @@
         <input
           type="password"
           required
-          class="p-2 text-gray-500 focus:outline-none"
+          placeholder="proveyouarehuman"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-check focus:outline-none"
           id="confirmPassword"
           v-model="confirmPassword"
         />

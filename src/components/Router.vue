@@ -1,5 +1,5 @@
 <template>
-  <router-link class="text-green-400" :to="route">{{ redirectBtn }}</router-link>
+  <router-link class="text-green-400 hover:font-bold" :to="route">{{ redirectBtn }}</router-link>
 </template>
 
 <script setup>

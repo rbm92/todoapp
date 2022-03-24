@@ -1,7 +1,7 @@
 <template>
   <!-- Item wrapper -->
   <div class="flex gap-5 items-center my-10 ml-10">
-    <p :class="{ taskDone: item.is_complete }">{{ item.title }}</p>
+    <p class="w-60" :class="{ taskDone: item.is_complete }">{{ item.title }}</p>
     <button
       v-if="!item.is_complete"
       class="btn-template bg-green-400 hover:bg-green-500"
@@ -18,7 +18,7 @@
     </button>
     <button
       class="btn-template bg-yellow-400 hover:bg-yellow-500"
-      @click="showEditDialog()"
+      @click="toggleEdit()"
     >
       Edit
     </button>
@@ -33,11 +33,12 @@
     <div v-if="editDialog" class="flex gap-5 items-center my-10 ml-10">
       <input
         type="text"
-        class="border border-gray-400 rounded"
+        placeholder="nothing is permanent"
+        class="p-2 pl-12 text-gray-500 rounded bg-icon bg-edit"
         v-model="editTodo"
       />
       <button
-        class="btn-template bg-gray-400 hover:bg-green-500"
+        class="btn-template bg-gray-400 w-20 hover:bg-gray-500"
         @click.prevent="edit()"
       >
         OK
@@ -68,9 +69,12 @@ const emit = defineEmits([
   "childToggle",
   "childRemove",
   "childEdit",
+  "childToggleEdit",
 ]);
 
 const props = defineProps(["item"]);
+
+console.log(props.item.title);
 
 // Error Handling
 function errHandl() {
@@ -79,9 +83,9 @@ function errHandl() {
 }
 
 // Show Edit Dialog
-function showEditDialog() {
-  //   emit("childShowEditDialog", props.item);
-  editDialog.value = true; // shows edit dialog
+function toggleEdit() {
+  editDialog.value = !editDialog.value;
+  editTodo.value = props.item.title
 }
 
 // Toggle Done and Undone

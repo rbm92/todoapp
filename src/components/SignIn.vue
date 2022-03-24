@@ -14,8 +14,9 @@
         <label for="email" class="mb-1 text-sm text-green-500">Email</label>
         <input
           type="text"
+          placeholder="random@names.com"
           required
-          class="p-2 text-gray-500 focus:outline-none"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-email focus:outline-none"
           id="email"
           v-model="email"
         />
@@ -27,7 +28,8 @@
         <input
           type="password"
           required
-          class="p-2 text-gray-500 focus:outline-none"
+          placeholder="avoid1234please"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-pwd focus:outline-none"
           id="password"
           v-model="password"
         />
@@ -68,7 +70,6 @@ const email = ref(null);
 const password = ref(null);
 const errorMsg = ref(null);
 
-
 async function signIn() {
   try {
     await useUserStore().signIn(email.value, password.value);
@@ -83,4 +84,5 @@ async function signIn() {
 }
 </script>
 
-<style></style>
+<style>
+</style>
