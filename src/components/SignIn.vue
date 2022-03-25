@@ -1,17 +1,13 @@
 <template>
   <section>
-    <!-- Error Handling -->
-    <div v-if="errorMsg" class="mb-10 p-5 rounded-md bg-gray-200 shadow-lg">
-      <p class="text-red-500">{{ errorMsg }}</p>
-    </div>
     <!-- Sign In -->
     <form
       @submit.prevent="signIn"
-      class="p-10 flex flex-col bg-gray-100 rounded-md shadow-lg"
+      class="mx-auto my-10 p-10 flex flex-col bg-gray-100 rounded-md shadow-lg"
     >
       <h1 class="text-3xl mb-5">Sign In</h1>
       <div class="flex flex-col mb-2">
-        <label for="email" class="mb-1 text-sm text-green-500">Email</label>
+        <label for="email" class="mb-1 text-lg text-green-500">Email</label>
         <input
           type="text"
           placeholder="random@names.com"
@@ -22,7 +18,7 @@
         />
       </div>
       <div class="flex flex-col mb-2">
-        <label for="password" class="mb-1 text-sm text-green-500"
+        <label for="password" class="mb-1 text-lg text-green-500"
           >Password</label
         >
         <input
@@ -37,13 +33,16 @@
 
       <button
         type="submit"
-        class="mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-400 border-solid border-2 border-transparent hover:border-green-400 hover:bg-white hover:text-green-400"
+        class="font-mono mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-400 border-solid border-2 border-transparent hover:border-green-400 hover:bg-white hover:text-green-400"
       >
         Sign In
       </button>
-      <p class="mt-10 text-center">
+
+      <!-- Error Handling -->
+    <p v-if="errorMsg" class="mt-10 rounded-md text-center bg-gray-100 font-bold font-mono text-red-600 italic">{{ errorMsg }}</p>
+
+      <p class="font-mono mt-10 text-center">
         Don't have an account?
-        <!-- <button @click="showSignUp" class="text-green-400">Sign Up</button> -->
         <Router :route="route" :redirectBtn="redirectBtn" />
       </p>
     </form>
@@ -76,7 +75,7 @@ async function signIn() {
     // if (error) throw error;
     redirect.push({ path: "/" });
   } catch (error) {
-    errorMsg.value = `Error: ${error.message}`;
+    errorMsg.value = 'Invalid login credentials';
     setTimeout(() => {
       errorMsg.value = null;
     }, 5000);

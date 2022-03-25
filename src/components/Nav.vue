@@ -1,23 +1,23 @@
 <template>
-  <header class="bg-green-300">
-    <nav class="p-10 flex flex-col gap-5 items-center sm:flex-row">
-      <a href="/" class="flex items-center gap-5 hover:font-bold">
+  <header class="flex justify-center bg-green-300">
+    <nav class="p-5 flex flex-col gap-x-40 gap-y-10 items-center sm:flex-row">
+      <a href="/" class="flex items-center gap-10">
         <img
-          class="w-20 bg-green-300"
-          src="../assets/todo-app.png"
+          class="w-16"
+          src="../assets/logo.svg"
           alt="logo"
         />
-        <h1 class="text-lg">Todo App</h1>
+        <h1 class="text-2xl font-mono">2DoVu</h1>
       </a>
       <ul class="flex flex-1 justify-end gap-10">
         <router-link
           v-if="!user"
-          class="cursor-pointer hover:font-bold"
+          class="font-mono text-lg cursor-pointer hover:font-bold hover:underline hover:underline-offset-8"
           to="/auth"
           >Sign In</router-link
         >
 
-        <li v-else @click="signOut" class="hover:font-bold cursor-pointer">
+        <li v-else @click="signOut" class="text-lg font-mono hover:font-bold hover:underline hover:underline-offset-8 cursor-pointer">
           Sign Out
         </li>
       </ul>

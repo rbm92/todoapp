@@ -32,6 +32,22 @@ export const useTaskStore = defineStore("tasks", {
             this.tasks = tasks;
             return this.tasks;
         },
+        async sortTitle() {
+            const { data: tasks } = await supabase
+                .from("tasks")
+                .select("*")
+                .order("title", { ascending: true });
+            this.tasks = tasks;
+            return this.tasks;
+        },
+        async sortDate() {
+            const { data: tasks } = await supabase
+                .from("tasks")
+                .select("*")
+                .order("inserted_at", { ascending: true });
+            this.tasks = tasks;
+            return this.tasks;
+        },
         async addTask(title) {
             console.log(useUserStore().user.id);
             const { data, error } = await supabase

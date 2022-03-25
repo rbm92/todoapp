@@ -4,6 +4,7 @@
     <router-view class="app-main" />
     <!-- your routes will load inside of these tags -->
   </section>
+  <Footer />
 </template>
 
 <script setup>
@@ -12,6 +13,7 @@ import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useUserStore } from "./store/user.js";
 import Nav from "./components/Nav.vue";
+import Footer from "./components/Footer.vue";
 import { ref } from "vue";
 import { supabase } from "./supabase";
 
