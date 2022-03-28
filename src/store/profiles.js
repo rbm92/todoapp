@@ -2,18 +2,18 @@ import { defineStore } from "pinia";
 import { supabase } from "../supabase";
 import { useUserStore } from "./user";
 
-export const useTaskStore = defineStore("tasks", {
+export const useTaskStore = defineStore("profiles", {
     state: () => ({
-        tasks: null,
+        profile: null,
     }),
     actions: {
-        async fetchTasks() {
-            const { data: tasks } = await supabase
-                .from("tasks")
+        async fetchProfiles() {
+            const { data: profiles } = await supabase
+                .from("profiles")
                 .select("*")
-                .order("is_complete", { ascending: true });
-            this.tasks = tasks;
-            return this.tasks;
+                .order("id", { ascending: false });
+            this.profiles = profiles;
+            return this.profiles;
         },
         // New code
         async filterDone() {

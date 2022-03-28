@@ -1,10 +1,10 @@
 <template>
   <!-- Adding a new task -->
   <form class="mx-auto p-5 rounded-md bg-gray-100 shadow-lg w-3/4 justify-center flex flex-col items-center gap-y-5" action="">
-    <div class="flex flex-col sm:flex-row justify-center items-center my-5 gap-10">
+    <div class="flex flex-col sm:flex-row justify-center items-center my-5 gap-10 w-full">
       <label class="font-mono text-xl" for="name">New Todo</label>
       <input
-        class="p-2 pl-12 text-gray-500 rounded bg-icon bg-new"
+        class="block w-4/5 sm:inline sm:w-1/2 p-2 pl-12 text-gray-500 rounded bg-icon bg-new"
         placeholder="What's on your mind?"
         v-model="newTodo"
         type="text"
@@ -12,7 +12,7 @@
         id="name"
       />
       <button
-        class="btn-template bg-blue-500 w-20 hover:bg-blue-600"
+        class="block w-full btn-template bg-blue-500 sm:inline sm:w-32 hover:bg-blue-600"
         @click.prevent="addTodo"
       >
         Add

@@ -1,5 +1,5 @@
 <template>
-  <section class="max-w-screen-sm mx-auto p-10">
+  <section class="cover-pic p-20">
     <router-view></router-view>
   </section>
 </template>
@@ -16,4 +16,5 @@ import { ref } from "vue";
 
 </script>
 
-<style></style>
+<style>
+</style>

@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <section class="max-w-screen-sm mx-auto">
     <!-- Sign Up -->
     <form
       @submit.prevent="signUp"
-      class="p-10 flex flex-col bg-gray-100 rounded-md shadow-lg"
+      class="p-10 flex flex-col bg-gray-200 rounded-md shadow-lg"
     >
       <h1 class="text-3xl mb-5">Sign Up</h1>
       <div class="flex flex-col mb-2">
@@ -31,7 +31,7 @@
         />
       </div>
       <div class="flex flex-col mb-2">
-        <label for="confirmedPassword" class="mb-1 text-sm text-green-500"
+        <label for="confirmedPassword" class="mb-1 text-lg text-green-500"
           >Confirm Password</label
         >
         <input
@@ -45,7 +45,7 @@
       </div>
       <button
         type="submit"
-        class="font-mono mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-400 border-solid border-2 border-transparent hover:border-green-400 hover:bg-white hover:text-green-400"
+        class="block w-full sm:inline sm:w-36 font-mono mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-400 border-solid border-2 border-transparent hover:border-green-400 hover:bg-white hover:text-green-400"
       >
         Sign Up
       </button>

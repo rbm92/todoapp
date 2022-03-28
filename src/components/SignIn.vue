@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <section class="max-w-screen-sm mx-auto">
     <!-- Sign In -->
     <form
       @submit.prevent="signIn"
-      class="mx-auto my-10 p-10 flex flex-col bg-gray-100 rounded-md shadow-lg"
+      class="mx-auto my-10 p-10 flex flex-col bg-gray-200 rounded-md shadow-lg"
     >
       <h1 class="text-3xl mb-5">Sign In</h1>
       <div class="flex flex-col mb-2">
@@ -33,7 +33,7 @@
 
       <button
         type="submit"
-        class="font-mono mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-400 border-solid border-2 border-transparent hover:border-green-400 hover:bg-white hover:text-green-400"
+        class="block w-full sm:inline sm:w-36 font-mono mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-400 border-solid border-2 border-transparent hover:border-green-400 hover:bg-white hover:text-green-400"
       >
         Sign In
       </button>

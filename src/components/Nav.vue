@@ -1,12 +1,10 @@
 <template>
-  <header class="flex justify-center bg-green-300">
-    <nav class="p-5 flex flex-col gap-x-40 gap-y-10 items-center sm:flex-row">
+  <header
+    class="static md:sticky md:top-0 w-full flex justify-around bg-green-300"
+  >
+    <nav class="p-5 flex flex-col gap-x-48 gap-y-10 items-center sm:flex-row">
       <a href="/" class="flex items-center gap-10">
-        <img
-          class="w-16"
-          src="../assets/logo.svg"
-          alt="logo"
-        />
+        <img class="w-16" src="../assets/logo.svg" alt="logo" />
         <h1 class="text-2xl font-mono">2DoVu</h1>
       </a>
       <ul class="flex flex-1 justify-end gap-10">
@@ -16,8 +14,18 @@
           to="/auth"
           >Sign In</router-link
         >
+        <router-link
+          v-if="user"
+          class="font-mono text-lg cursor-pointer hover:font-bold hover:underline hover:underline-offset-8"
+          to="/profile"
+          >Profile
+        </router-link>
 
-        <li v-else @click="signOut" class="text-lg font-mono hover:font-bold hover:underline hover:underline-offset-8 cursor-pointer">
+        <li
+          v-if="user"
+          @click="signOut"
+          class="text-lg font-mono hover:font-bold hover:underline hover:underline-offset-8 cursor-pointer"
+        >
           Sign Out
         </li>
       </ul>

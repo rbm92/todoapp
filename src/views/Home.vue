@@ -15,93 +15,93 @@
     <!-- <h2 class="text-3xl font-bold mt-10 ml-10">List of Tasks</h2> -->
     <!-- Buttons controlling all tasks -->
     <div
-      class="flex flex-col sm:flex-row w-3/4 gap-10 my-20 rounded-md bg-gray-100 shadow-lg p-10 mx-auto justify-center"
+      class="flex flex-col items-center sm:items-start sm:flex-row w-3/4 gap-10 my-20 rounded-md bg-gray-100 shadow-lg p-10 mx-auto justify-center"
     >
       <!-- Select All -->
-      <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-1 w-full">
         <button
-          class="pl-10 bg-btn bg-all btn-template bg-slate-500 hover:bg-slate-600"
+          class="w-full sm:w-36 pl-10 bg-btn bg-all btn-template bg-slate-500 hover:bg-slate-600 mx-auto"
           @click="toggleDropdownSelect"
         >
           SELECT
         </button>
         <button
           v-if="dropdownSelect"
-          class="pl-10 bg-btn bg-all btn-template bg-green-600 hover:bg-green-700"
+          class="w-full sm:w-36 pl-10 bg-btn bg-all btn-template bg-green-600 hover:bg-green-700 mx-auto"
           @click="markAllDone"
         >
           Done
         </button>
         <button
           v-if="dropdownSelect"
-          class="pl-10 bg-btn bg-all btn-template bg-indigo-400 hover:bg-indigo-500"
+          class="w-full sm:w-36 pl-10 bg-btn bg-all btn-template bg-indigo-400 hover:bg-indigo-500 mx-auto"
           @click="markAllUndone"
         >
           Undone
         </button>
         <button
           v-if="dropdownSelect"
-          class="pl-10 bg-btn bg-all btn-template bg-red-600 hover:bg-red-700"
+          class="w-full sm:w-36 pl-10 bg-btn bg-all btn-template bg-red-600 hover:bg-red-700 mx-auto"
           @click="confirmRemoveAll"
         >
           Remove
         </button>
       </div>
       <!-- Filters -->
-      <div class="flex flex-col gap-1">
+      <div class="w-full flex flex-col gap-1 w-full">
         <button
-          class="pl-10 bg-btn bg-filter btn-template bg-gray-500 hover:bg-gray-600"
+          class="w-full sm:w-36 pl-10 bg-btn bg-filter btn-template bg-gray-500 hover:bg-gray-600 mx-auto"
           @click="toggleDropdownFilter"
         >
           SELECT
         </button>
         <button
           v-if="dropdownFilter"
-          class="pl-10 bg-btn bg-filter btn-template bg-lime-600 hover:bg-lime-700"
+          class="w-full sm:w-36 pl-10 bg-btn bg-filter btn-template bg-lime-600 hover:bg-lime-700 mx-auto"
           @click="showDone"
         >
           Done
         </button>
         <button
           v-if="dropdownFilter"
-          class="pl-10 bg-btn bg-filter btn-template bg-sky-600 hover:bg-sky-700"
+          class="w-full sm:w-36 pl-10 bg-btn bg-filter btn-template bg-sky-600 hover:bg-sky-700 mx-auto"
           @click="showUndone"
         >
           Undone
         </button>
         <button
           v-if="dropdownFilter"
-          class="pl-10 bg-btn bg-filter btn-template bg-pink-600 hover:bg-pink-700"
+          class="w-full sm:w-36 pl-10 bg-btn bg-filter btn-template bg-pink-600 hover:bg-pink-700 mx-auto"
           @click="resetFilters"
         >
           Reset
         </button>
       </div>
       <!-- Sorts -->
-      <div class="flex flex-col gap-1">
+      <div class="w-full flex flex-col gap-1 w-full">
         <button
-          class="pl-10 bg-btn bg-sort btn-template bg-zinc-500 hover:bg-zinc-600"
+          class="w-full sm:w-36 pl-10 bg-btn bg-sort btn-template bg-zinc-500 hover:bg-zinc-600 mx-auto"
           @click="toggleDropdownSort"
         >
           SELECT
         </button>
         <button
           v-if="dropdownSort"
-          class="pl-10 bg-btn bg-sort btn-template bg-emerald-600 hover:bg-emerald-700"
+          class="w-full sm:w-36 pl-10 bg-btn bg-sort btn-template bg-emerald-600 hover:bg-emerald-700 mx-auto"
           @click="sortTitle"
         >
           Title
         </button>
         <button
           v-if="dropdownSort"
-          class="pl-10 bg-btn bg-sort btn-template bg-cyan-600 hover:bg-cyan-700"
+          class="w-full sm:w-36 pl-10 bg-btn bg-sort btn-template bg-cyan-600 hover:bg-cyan-700 mx-auto"
           @click="sortDate"
         >
           Date
         </button>
         <button
           v-if="dropdownSort"
-          class="pl-10 bg-btn bg-sort btn-template bg-rose-600 hover:bg-rose-700"
+          class="w-full sm:w-36 pl-10 bg-btn bg-sort btn-template bg-rose-600 hover:bg-rose-700 mx-auto"
           @click="resetFilters"
         >
           Reset
@@ -113,31 +113,38 @@
         class="flex flex-col sm:flex-row items-center justify-center gap-5 rounded py-5 rounded-md bg-gray-100"
       ></form>
     </div>
+    <!-- Remove All dialog -->
     <div
       v-if="removeAllDialog"
-      class="flex w-3/4 mx-auto rounded-md bg-gray-100 shadow-lg p-5 gap-5"
+      class="flex flex-col sm:flex-row w-3/4 mx-auto rounded-md bg-gray-100 shadow-lg px-12 py-5 gap-5 items-center"
     >
-      <input class="bg-gray-100 bg-icon bg-danger w-10" type="text" />
-      <p class="font-mono text-red-600 italic font-bold w-2/3">
-        You're about to remove all tasks, are you sure?
-      </p>
+      <!-- Alert message wrapper -->
+      <div class="w-full flex items-center justify-center gap-x-5">
+        <input class="bg-gray-100 bg-icon bg-danger w-10" type="text" />
+        <p class="font-mono text-red-600 italic font-bold w-2/3">
+          You're about to remove all tasks, are you sure?
+        </p>
+      </div>
       <button
-        class="bg-btn bg-done btn-template bg-green-400 w-16 hover:bg-green-500"
+        class="block w-full sm:inline sm:w-20 bg-btn bg-done btn-template bg-green-400 hover:bg-green-500"
         @click.prevent="removeAll"
       ></button>
       <button
-        class="bg-btn bg-undone btn-template bg-red-500 w-16 hover:bg-red-600"
+        class="block w-full sm:inline sm:w-20 bg-btn bg-undone btn-template bg-red-500 hover:bg-red-600"
         @click.prevent="confirmRemoveAll"
       ></button>
     </div>
-    <!-- Remove All dialog -->
     <ul
       class="flex justify-center items-center mx-auto rounded-md bg-gray-100 shadow-lg p-10 my-20 w-3/4"
     >
       <li class="w-full">
         <!-- Task heading -->
-        <div class="flex justify-around items-center mx-auto">
-          <p class="font-mono font-bold text-2xl">Task</p>
+        <div class="w-full sm:w-2/3 flex mx-auto gap-x-12 text-center">
+          <p
+            class="w-full text-center sm:text-left sm:w-1/3 font-mono font-bold text-2xl"
+          >
+            Task
+          </p>
           <p class="font-mono font-bold text-2xl hidden sm:block">Added at</p>
         </div>
         <TaskItem
@@ -239,9 +246,10 @@ async function sortTitle() {
 }
 
 async function sortDate() {
-  getTasks();
+  // getTasks();
   const sortDate = await useTaskStore().sortDate();
   tasks.value = sortDate;
+  console.log(tasks.value);
   resetDropdowns();
 }
 
@@ -377,5 +385,15 @@ async function remove(item) {
 .bg-sort {
   background-image: url("../assets/sort.svg");
   background-position: 20px;
+}
+
+.cover-pic {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("../assets/todo-cover.jpeg");
+  background-size: cover;
+  background-position: center center;
 }
 </style>

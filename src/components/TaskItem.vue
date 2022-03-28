@@ -1,49 +1,57 @@
 <template>
   <!-- Item wrapper -->
-  <div class="flex flex-col sm:flex-row gap-5 items-center my-10">
-    <p class="text-center font-mono w-2/3" :class="{ taskDone: item.is_complete }">{{ item.title }}</p>
-    <p class="text-center font-mono w-1/3">{{item.inserted_at.split('20')[1].split('T')[0]}}</p>
-    <div class="flex gap-2">
-    <button
-      v-if="!item.is_complete"
-      class="w-12 bg-btn bg-done btn-template bg-green-400 hover:bg-green-500"
-      @click="toggleTodo"
+  <div
+    class="flex flex-col sm:flex-row gap-5 items-center justify-center my-10"
+  >
+    <p
+      class="text-center font-mono w-full sm:w-1/2"
+      :class="{ taskDone: item.is_complete }"
     >
-    </button>
-    <button
-      v-if="item.is_complete"
-      class="w-12 bg-btn bg-undone btn-template bg-indigo-400 hover:bg-indigo-500"
-      @click="toggleTodo"
+      {{ item.title }}
+    </p>
+    <p class="text-center font-mono w-full sm:w-1/4">{{ item.inserted_at.split('T')[0] }}</p>
+    <!-- Button wrapper -->
+    <div
+      class="w-full sm:w-1/2 flex flex-col sm:flex-row gap-2 items-center justify-center"
     >
-    </button>
-    <button
-      class="w-12 bg-btn bg-edit btn-template bg-yellow-400 hover:bg-yellow-500"
-      @click="toggleEdit"
-    >
-    </button>
+      <button
+        v-if="!item.is_complete"
+        class="block w-full sm:inline sm:w-20 bg-btn bg-done btn-template bg-green-400 hover:bg-green-500"
+        @click="toggleTodo"
+      ></button>
+      <button
+        v-if="item.is_complete"
+        class="block w-full sm:inline sm:w-20 bg-btn bg-undone btn-template bg-indigo-400 hover:bg-indigo-500"
+        @click="toggleTodo"
+      ></button>
+      <button
+        class="block w-full sm:inline sm:w-20 bg-btn bg-edit btn-template bg-yellow-400 hover:bg-yellow-500"
+        @click="toggleEdit"
+      ></button>
 
-    <button
-      class="w-12 bg-btn bg-bin btn-template bg-red-500 hover:bg-red-600"
-      @click="confirmRemove"
-    >
-    </button>
+      <button
+        class="block w-full sm:inline sm:w-20 bg-btn bg-bin btn-template bg-red-500 hover:bg-red-600"
+        @click="confirmRemove"
+      ></button>
     </div>
   </div>
 
   <!-- Edit dialog -->
   <form action="">
-    <div v-if="editDialog" class="flex gap-5 items-center justify-center mx-auto my-10">
+    <div
+      v-if="editDialog"
+      class="flex flex-col sm:flex-row gap-5 items-center justify-center mx-auto my-10"
+    >
       <input
         type="text"
         placeholder="nothing is permanent"
-        class="a w-2/3 p-2 pl-12 text-gray-500 rounded bg-icon bg-edit"
+        class="block w-80 sm:inline sm:w-3/4 p-2 pl-12 text-gray-500 rounded bg-icon bg-edit"
         v-model="editTodo"
       />
       <button
-        class="bg-btn bg-done btn-template bg-green-400 w-12 hover:bg-green-500"
+        class="block w-full sm:inline sm:w-20 bg-btn bg-done btn-template bg-green-400 hover:bg-green-500"
         @click.prevent="edit"
-      >
-      </button>
+      ></button>
       <p v-if="empty" class="text-red-600 font-bold">
         {{ errorInput }}
       </p>
@@ -53,26 +61,26 @@
   <form
     action=""
     v-if="removeDialog"
-    class="flex items-center justify-around gap-20 bg-white rounded p-5 m-10"
+    class="flex flex-col sm:flex-row items-center justify-around bg-white rounded p-5 gap-y-5 gap-x-10"
   >
-    <div class="flex items-center justify-around gap-10">
+    <!-- Alert message wrapper -->
+    <div class="sm:w-full flex items-center justify-center gap-x-5">
       <input class="bg-icon bg-danger w-10" type="text" />
-      <p class="font-mono font-bold text-red-600 italic">Remove task?</p>
+      <p class="w-4/5 font-mono font-bold text-red-600 italic">Remove task?</p>
     </div>
-    <div class="flex items-center justify-around gap-10">
-      <button
-        class="btn-template bg-gray-400 w-20 hover:bg-green-500"
-        @click.prevent="remove"
-      >
-        OK
-      </button>
-      <button
-        class="btn-template bg-gray-400 w-20 hover:bg-red-500"
-        @click.prevent="confirmRemove"
-      >
-        Cancel
-      </button>
-    </div>
+
+    <button
+      class="block w-full sm:inline sm:w-32 btn-template bg-gray-400 hover:bg-green-500"
+      @click.prevent="remove"
+    >
+      OK
+    </button>
+    <button
+      class="block w-full sm:inline sm:w-32 btn-template bg-gray-400 hover:bg-red-500"
+      @click.prevent="confirmRemove"
+    >
+      Cancel
+    </button>
   </form>
 </template>
 
@@ -100,6 +108,7 @@ const emit = defineEmits([
 ]);
 
 const props = defineProps(["item"]);
+// console.log(props.value.inserted_at);
 
 // Error Handling
 function errHandl() {
@@ -142,6 +151,7 @@ function confirmRemove() {
 // Remove task
 function remove() {
   emit("childRemove", props.item);
+  confirmRemove();
 }
 </script>
 
