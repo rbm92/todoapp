@@ -3,7 +3,7 @@
     <!-- Sign In -->
     <form
       @submit.prevent="signIn"
-      class="mx-auto my-10 p-10 flex flex-col bg-gray-200 rounded-md shadow-lg"
+      class="mx-auto my-10 p-10 flex flex-col bg-gray-200 rounded-md shadow-lg gap-y-5"
     >
       <h1 class="text-3xl mb-5">Sign In</h1>
       <div class="flex flex-col mb-2">

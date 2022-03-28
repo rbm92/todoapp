@@ -9,6 +9,14 @@
         >@{{ userName }}</span
       >
     </div>
+
+    <router-link to="/profile">
+      <button
+        class="font-mono block w-full sm:w-60 mx-auto btn-template bg-green-500 hover:bg-green-600"
+      >
+        Update your Profile
+      </button>
+    </router-link>
     <!-- Adding a new task -->
     <NewTask @childAddTodo="addTodo" />
 
@@ -340,6 +348,10 @@ async function remove(item) {
   background-image: url("../assets/pwd.svg");
 }
 
+.bg-newpwd {
+  background-image: url("../assets/new-pwd.svg");
+}
+
 .bg-check {
   background-image: url("../assets/check.svg");
 }
@@ -370,6 +382,14 @@ async function remove(item) {
 
 .bg-bin {
   background-image: url("../assets/bin.svg");
+}
+
+.bg-avatar {
+  background-image: url("../assets/avatar.svg");
+}
+
+.bg-website {
+  background-image: url("../assets/website.svg");
 }
 
 .bg-filter {

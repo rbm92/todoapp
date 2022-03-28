@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { supabase } from "../supabase";
+import { useProfileStore } from "./profile";
 // import { router } from 'vue-router';
 
 export const useUserStore = defineStore("user", {
@@ -25,6 +26,8 @@ export const useUserStore = defineStore("user", {
                 this.user = user;
                 // console.log(this.user);
             }
+            
+            await useProfileStore().createProfile(email, user.id)
         },
         async signIn(email, password) {
             const { user, error } = await supabase.auth.signIn({
@@ -39,6 +42,7 @@ export const useUserStore = defineStore("user", {
         },
         async signOut() {
             const { user, error } = await supabase.auth.signOut()
+            this.user = {};
         },
         persist: {
             enabled: true,

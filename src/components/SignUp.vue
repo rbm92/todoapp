@@ -3,7 +3,7 @@
     <!-- Sign Up -->
     <form
       @submit.prevent="signUp"
-      class="p-10 flex flex-col bg-gray-200 rounded-md shadow-lg"
+      class="p-10 flex flex-col bg-gray-200 rounded-md shadow-lg gap-y-5"
     >
       <h1 class="text-3xl mb-5">Sign Up</h1>
       <div class="flex flex-col mb-2">
@@ -88,16 +88,16 @@ async function signUp() {
       redirect.push({ path: "/auth" });
     } catch (error) {
       errorMsg.value = error.message;
-      // setTimeout(() => {
-      //   errorMsg.value = null;
-      // }, 5000);
+      setTimeout(() => {
+        errorMsg.value = null;
+      }, 5000);
     }
     return;
   }
   errorMsg.value = "Passwords do not match";
-  // setTimeout(() => {
-  //   errorMsg.value = null;
-  // }, 5000);
+  setTimeout(() => {
+    errorMsg.value = null;
+  }, 5000);
 }
 </script>
 

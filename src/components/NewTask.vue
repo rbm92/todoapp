@@ -1,6 +1,6 @@
 <template>
   <!-- Adding a new task -->
-  <form class="mx-auto p-5 rounded-md bg-gray-100 shadow-lg w-3/4 justify-center flex flex-col items-center gap-y-5" action="">
+  <form class="mx-auto my-20 p-5 rounded-md bg-gray-100 shadow-lg w-3/4 justify-center flex flex-col items-center gap-y-5" action="">
     <div class="flex flex-col sm:flex-row justify-center items-center my-5 gap-10 w-full">
       <label class="font-mono text-xl" for="name">New Todo</label>
       <input
