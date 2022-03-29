@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { supabase } from "../supabase";
 import { useProfileStore } from "./profile";
-// import { router } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 export const useUserStore = defineStore("user", {
     state: () => ({
@@ -17,7 +17,8 @@ export const useUserStore = defineStore("user", {
             this.user = user;
         },
         async signUp(email, password) {
-            const { user, error } = await supabase.auth.signUp({
+            try {
+                const { user, error } = await supabase.auth.signUp({
                 email: email,
                 password: password,
             });
@@ -25,9 +26,11 @@ export const useUserStore = defineStore("user", {
             if (user) {
                 this.user = user;
                 // console.log(this.user);
+                await useProfileStore().createProfile(email, user.id)
             }
-            
-            await useProfileStore().createProfile(email, user.id)
+            } catch(error) {
+                this.error = error;
+            }
         },
         async signIn(email, password) {
             const { user, error } = await supabase.auth.signIn({
@@ -37,12 +40,11 @@ export const useUserStore = defineStore("user", {
             if (error) throw error;
             if (user) {
                 this.user = user;
-                console.log(this.user);
+                // console.log(this.user);
             }
         },
         async signOut() {
             const { user, error } = await supabase.auth.signOut()
-            this.user = {};
         },
         persist: {
             enabled: true,
@@ -53,5 +55,15 @@ export const useUserStore = defineStore("user", {
                 },
             ],
         },
+        async resetPassword(email) {
+            const redirect = useRouter();
+            const { user, error } = await supabase.auth.api.
+                resetPasswordForEmail(email);
+                // redirect.push({ path: "/auth/reset" });
+
+        },
+        async updatePassword(password) {
+            const { user, error } = await supabase.auth.update({ password: password })
+        }
     },
-});
+}); 

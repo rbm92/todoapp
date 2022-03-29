@@ -2,11 +2,11 @@
   <section class="max-w-screen-sm mx-auto">
     <!-- Sign Up -->
     <form
-      @submit.prevent="signUp"
+      @submit.prevent="updatePassword"
       class="p-10 flex flex-col bg-gray-200 rounded-md shadow-lg gap-y-5"
     >
-      <h1 class="text-3xl mb-5">Sign Up</h1>
-      <div class="flex flex-col mb-2">
+      <h1 class="text-3xl mb-5">Update Password</h1>
+      <!-- <div class="flex flex-col mb-2">
         <label for="email" class="mb-1 text-lg text-green-500">Email</label>
         <input
           type="text"
@@ -16,10 +16,10 @@
           id="email"
           v-model="email"
         />
-      </div>
+      </div> -->
       <div class="flex flex-col mb-2">
         <label for="password" class="mb-1 text-lg text-green-500"
-          >Password</label
+          >New Password</label
         >
         <input
           type="password"
@@ -32,7 +32,7 @@
       </div>
       <div class="flex flex-col mb-2">
         <label for="confirmedPassword" class="mb-1 text-lg text-green-500"
-          >Confirm Password</label
+          >Confirm New Password</label
         >
         <input
           type="password"
@@ -47,7 +47,7 @@
         type="submit"
         class="block w-full sm:inline sm:w-36 font-mono mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-400 border-solid border-2 border-transparent hover:border-green-400 hover:bg-white hover:text-green-400"
       >
-        Sign Up
+        Update
       </button>
       <!-- Confirmation Message -->
       <p
@@ -59,14 +59,14 @@
       <!-- Error Handling -->
       <p
         v-if="errorMsg"
-        class="p-5 mt-10 rounded-md text-center bg-gray-100 font-bold font-mono text-red-600 italic"
+        class="mt-10 rounded-md text-center bg-gray-100 font-bold font-mono text-red-600 italic"
       >
         {{ errorMsg }}
       </p>
-      <p class="font-mono mt-10 text-center">
+      <!-- <p class="font-mono mt-10 text-center">
         Already have an account?
         <Router :route="route" :redirectBtn="redirectBtn" />
-      </p>
+      </p> -->
     </form>
   </section>
 </template>
@@ -90,34 +90,27 @@ const redirect = useRouter();
 const email = ref(null);
 const password = ref(null);
 const confirmPassword = ref(null);
-const error = ref(null);
 const errorMsg = ref(null);
 const okMsg = ref(null);
 
-async function signUp() {
-  if (password.value !== confirmPassword.value) {
-    errorMsg.value = "Passwords do not match";
-    setTimeout(() => {
-      errorMsg.value = null;
-    }, 3000);
+async function updatePassword() {
+  if (password.value === confirmPassword.value) {
+    try {
+      await useUserStore().updatePassword(password.value);
+      if (error) throw error;
+      redirect.push({ path: "/" });
+    } catch (error) {
+      errorMsg.value = error.message;
+      setTimeout(() => {
+        errorMsg.value = null;
+      }, 5000);
+    }
     return;
   }
-
-  try {
-    await useUserStore().signUp(email.value, password.value);
-    if (error) throw error;
-    okMsg.value = "A confirmation message has been sent to your email";
-    setTimeout(() => {
-      okMsg.value = null;
-    }, 3000);
-    redirect.push({ path: "/auth" });
-  } catch (error) {
-    // errorMsg.value = error.message;
-    errorMsg.value = "Invalid credentials";
-    setTimeout(() => {
-      errorMsg.value = null;
-    }, 3000);
-  }
+  errorMsg.value = "Passwords do not match";
+  setTimeout(() => {
+    errorMsg.value = null;
+  }, 5000);
 }
 </script>
 

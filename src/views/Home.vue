@@ -2,17 +2,17 @@
   <!-- Dashboard -->
   <div>
     <div
-      class="flex flex-col sm:flex-row items-center justify-center m-10 gap-x-28 gap-y-5 my-20"
+      class="w-3/4 mx-auto flex flex-col sm:flex-row items-center justify-around my-20 gap-y-5"
     >
       <h1 class="text-4xl font-bold">Welcome back!</h1>
-      <span class="font-mono text-3xl font-bold text-green-500"
-        >@{{ userName }}</span
-      >
+      <p class="font-mono text-3xl font-bold text-green-500">
+        {{ profiles.username }}
+      </p>
     </div>
 
     <router-link to="/profile">
       <button
-        class="font-mono block w-full sm:w-60 mx-auto btn-template bg-green-500 hover:bg-green-600"
+        class="font-mono block w-full sm:w-60 mx-auto btn-template bg-green-400 hover:bg-green-500"
       >
         Update your Profile
       </button>
@@ -173,6 +173,8 @@ import NewTask from "../components/NewTask.vue";
 import TaskItem from "../components/TaskItem.vue";
 import { useTaskStore } from "../store/task";
 import { useUserStore } from "../store/user";
+import { useProfileStore } from "../store/profile";
+import { useRouter } from "vue-router";
 
 // Initializing array of tasks
 let tasks = ref([]);
@@ -188,14 +190,22 @@ async function getTasks() {
 
 getTasks();
 
-// Printing user email
-const userEmail = useUserStore().user.email;
-const userName = userEmail.split("@")[0];
+const profiles = ref([]);
+
+async function getProfile() {
+  const res = await useProfileStore().fetchProfile();
+  profiles.value = res[0];
+  // console.log(profiles.value);
+}
+
+getProfile();
 
 // Dropdown variables
 const dropdownSelect = ref(false);
 const dropdownFilter = ref(false);
 const dropdownSort = ref(false);
+
+const redirect = useRouter();
 
 // Global Functions
 async function showDone() {
@@ -386,6 +396,10 @@ async function remove(item) {
 
 .bg-avatar {
   background-image: url("../assets/avatar.svg");
+}
+
+.bg-ghost {
+  background-image: url("../assets/ghost.svg");
 }
 
 .bg-website {

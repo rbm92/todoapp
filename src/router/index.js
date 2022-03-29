@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import SignIn from "../components/SignIn.vue";
 import SignUp from "../components/SignUp.vue";
+import Reset from "../components/Reset.vue";
 
 const routes = [
     {
@@ -17,6 +18,10 @@ const routes = [
             {
                 path: "sign-up",
                 component: SignUp
+            },
+            {
+                path: "reset",
+                component: Reset
             },
         ]
     },

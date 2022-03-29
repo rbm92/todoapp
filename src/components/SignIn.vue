@@ -38,10 +38,27 @@
         Sign In
       </button>
 
-      <!-- Error Handling -->
-    <p v-if="errorMsg" class="mt-10 rounded-md text-center bg-gray-100 font-bold font-mono text-red-600 italic">{{ errorMsg }}</p>
+      <p v-if="okMsg" class="p-5 rounded-md text-center bg-gray-100 font-bold font-mono text-green-400">{{ okMsg }}</p>
 
-      <p class="font-mono mt-10 text-center">
+      <!-- Error Handling -->
+      <div v-if="errorMsg">
+        <p
+          class="p-5 rounded-md text-center bg-gray-100 font-bold font-mono text-red-600 italic"
+        >
+          {{ errorMsg }}
+        </p>
+        <div class="pt-5 flex gap-5 items-center justify-center">
+          <p class="text-center font-mono">Forgot your password?</p>
+          <button
+            @click="resetPassword"
+            class="p-3 font-mono font-bold text-green-500 rounded hover:bg-green-400 hover:text-white"
+          >
+            Reset it
+          </button>
+        </div>
+      </div>
+
+      <p class="font-mono text-center">
         Don't have an account?
         <Router :route="route" :redirectBtn="redirectBtn" />
       </p>
@@ -68,6 +85,7 @@ const redirect = useRouter();
 const email = ref(null);
 const password = ref(null);
 const errorMsg = ref(null);
+const okMsg = ref(null);
 
 async function signIn() {
   try {
@@ -75,13 +93,21 @@ async function signIn() {
     // if (error) throw error;
     redirect.push({ path: "/" });
   } catch (error) {
-    errorMsg.value = 'Invalid login credentials';
+    errorMsg.value = "Invalid login credentials";
     setTimeout(() => {
       errorMsg.value = null;
     }, 5000);
   }
 }
+
+async function resetPassword() {
+  await useUserStore().resetPassword(email.value);
+  errorMsg.value = null;
+  okMsg.value = "A confirmation message has been sent to your email";
+  setTimeout(() => {
+      okMsg.value = null;
+    }, 3000);
+}
 </script>
 
-<style>
-</style>
+<style></style>
