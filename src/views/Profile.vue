@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="pt-10 pb-20">
     <div
       class="w-3/4 mx-auto my-10 flex flex-col sm:flex-row items-center justify-around gap-y-5"
     >
@@ -18,17 +18,18 @@
     <div
       class="mx-auto w-3/4 items-center flex flex-col sm:flex-row justify-around gap-y-5"
     >
+      <label for="avatar" class="block border border-black rounded text-center p-2 mx-auto w-3/4 cursor-pointer sm:w-60 dark:border-white dark:text-white">
       <input
         type="file"
-        class="mx-auto w-3/4 sm:w-80 dark:text-white"
+        class="hidden"
         @change="handleFileChange"
-        id="upload-avatar"
+        id="avatar"
         name="avatar"
         accept="image/png, image/jpeg"
-      />
+      />Select a file</label>
       <button
         @click="uploadFile"
-        class="font-mono block w-full sm:w-60 mx-auto my-10 btn-template bg-sky-500 hover:bg-sky-600"
+        class="font-mono block w-full sm:w-60 mx-auto btn-template bg-sky-500 hover:bg-sky-600"
       >
         Upload
       </button>
@@ -36,7 +37,7 @@
 
     <router-link to="/">
       <button
-        class="font-mono block w-full sm:w-60 mx-auto my-10 btn-template bg-green-500 hover:bg-green-600"
+        class="font-mono block w-full sm:w-60 mx-auto my-20 btn-template bg-green-500 hover:bg-green-600"
       >
         Back to Dashboard
       </button>
@@ -52,7 +53,7 @@
 
     <form
       @submit.prevent="updateProfile"
-      class="max-w-screen-sm mx-auto w-3/4 p-10 flex flex-col gap-y-5 bg-gray-200 rounded-md shadow-lg my-10 dark:bg-gray-500"
+      class="max-w-screen-sm mx-auto w-3/4 p-10 flex flex-col gap-y-5 bg-gray-200 rounded-md shadow-lg dark:bg-gray-500"
     >
       <div class="flex flex-col mb-2">
         <label for="username" class="mb-1 text-lg text-green-500"
@@ -65,12 +66,12 @@
             required
             :disabled="disabledUsername"
             placeholder="add a username"
-            class="w-4/5 p-2 pl-12 text-gray-500 rounded bg-icon bg-avatar focus:outline-none disabled:bg-slate-100"
+            class="w-4/5 p-2 pl-12 text-gray-500 rounded bg-icon bg-avatar focus:outline-none disabled:bg-slate-300"
             id="username"
             v-model="profiles.username"
           />
           <button
-            class="w-1/5 bg-btn bg-edit btn-template bg-white"
+            class="w-1/5 bg-btn bg-edit btn-template bg-slate-300 hover:bg-slate-400"
             @click.prevent="toggleUsername"
           ></button>
         </div>
@@ -81,7 +82,7 @@
           type="text"
           placeholder="random@names.com"
           disabled
-          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-email focus:outline-none disabled:bg-slate-100"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-email focus:outline-none disabled:bg-slate-300"
           id="email"
           v-model="email"
         />
@@ -99,12 +100,12 @@
             :disabled="disabledWebsite"
             required
             placeholder="add your website"
-            class="w-full p-2 pl-12 text-gray-500 rounded bg-icon bg-website focus:outline-none disabled:bg-slate-100"
+            class="w-full p-2 pl-12 text-gray-500 rounded bg-icon bg-website focus:outline-none disabled:bg-slate-300"
             id="website"
             v-model="profiles.website"
           />
           <button
-            class="w-1/5 bg-btn bg-edit btn-template bg-white"
+            class="w-1/5 bg-btn bg-edit btn-template bg-slate-300 hover:bg-slate-400"
             @click.prevent="toggleWebsite"
           ></button>
         </div>

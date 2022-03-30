@@ -1,6 +1,6 @@
 <template>
   <!-- Dashboard -->
-  <div>
+  <div class="pb-20">
     <div
       class="w-3/4 mx-auto flex flex-col sm:flex-row items-center justify-around my-20 gap-y-5"
     >
@@ -143,7 +143,7 @@
       ></button>
     </div>
     <ul
-      class="flex justify-center items-center mx-auto rounded-md bg-gray-100 shadow-lg p-10 my-20 w-3/4 dark:bg-gray-400"
+      class="flex justify-center items-center mx-auto rounded-md bg-gray-100 shadow-lg p-10 w-3/4 dark:bg-gray-400"
     >
       <li class="w-full">
         <!-- Task heading -->
@@ -419,19 +419,8 @@ async function remove(item) {
 
 .cover-pic {
   background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)),
     url("../assets/todo-cover.jpeg");
-  background-size: cover;
-  background-position: center center;
-}
-
-.cover-pic-dark {
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0.2)
-    ),
-    url("../assets/todo-cover.jpeg");;
 }
 </style>
