@@ -1,5 +1,5 @@
 <template>
-  <section class="cover-pic p-20">
+  <section class="cover-pic p-20 dark:cover-pic-dark">
     <router-view></router-view>
   </section>
 </template>

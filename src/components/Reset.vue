@@ -3,7 +3,7 @@
     <!-- Sign Up -->
     <form
       @submit.prevent="updatePassword"
-      class="p-10 flex flex-col bg-gray-200 rounded-md shadow-lg gap-y-5"
+      class="p-10 flex flex-col bg-gray-200 rounded-md shadow-lg gap-y-5 dark:bg-gray-500"
     >
       <h1 class="text-3xl mb-5">Update Password</h1>
       <!-- <div class="flex flex-col mb-2">
@@ -18,7 +18,7 @@
         />
       </div> -->
       <div class="flex flex-col mb-2">
-        <label for="password" class="mb-1 text-lg text-green-500"
+        <label for="password" class="mb-1 text-lg"
           >New Password</label
         >
         <input
@@ -31,7 +31,7 @@
         />
       </div>
       <div class="flex flex-col mb-2">
-        <label for="confirmedPassword" class="mb-1 text-lg text-green-500"
+        <label for="confirmedPassword" class="mb-1 text-lg"
           >Confirm New Password</label
         >
         <input
@@ -45,7 +45,7 @@
       </div>
       <button
         type="submit"
-        class="block w-full sm:inline sm:w-36 font-mono mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-400 border-solid border-2 border-transparent hover:border-green-400 hover:bg-white hover:text-green-400"
+        class="block w-full sm:inline sm:w-36 font-mono mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-500 border-solid border-2 border-transparent hover:border-green-500 hover:bg-white hover:text-green-500"
       >
         Update
       </button>

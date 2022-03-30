@@ -4,7 +4,7 @@
     <div
       class="w-3/4 mx-auto flex flex-col sm:flex-row items-center justify-around my-20 gap-y-5"
     >
-      <h1 class="text-4xl font-bold">Welcome back!</h1>
+      <h1 class="text-4xl font-bold dark:text-slate-300">Welcome back!</h1>
       <p class="font-mono text-3xl font-bold text-green-500">
         {{ profiles.username }}
       </p>
@@ -12,9 +12,9 @@
 
     <router-link to="/profile">
       <button
-        class="font-mono block w-full sm:w-60 mx-auto btn-template bg-green-400 hover:bg-green-500"
+        class="font-mono block w-full sm:w-60 mx-auto btn-template text-slate-100 bg-green-500 hover:bg-green-600"
       >
-        Update your Profile
+        Update Profile
       </button>
     </router-link>
     <!-- Adding a new task -->
@@ -23,7 +23,7 @@
     <!-- <h2 class="text-3xl font-bold mt-10 ml-10">List of Tasks</h2> -->
     <!-- Buttons controlling all tasks -->
     <div
-      class="flex flex-col items-center sm:items-start sm:flex-row w-3/4 gap-10 my-20 rounded-md bg-gray-100 shadow-lg p-10 mx-auto justify-center"
+      class="flex flex-col items-center sm:items-start sm:flex-row w-3/4 gap-10 my-20 rounded-md bg-gray-100 shadow-lg p-10 mx-auto justify-center dark:bg-gray-400"
     >
       <!-- Select All -->
       <div class="flex flex-col gap-1 w-full">
@@ -143,7 +143,7 @@
       ></button>
     </div>
     <ul
-      class="flex justify-center items-center mx-auto rounded-md bg-gray-100 shadow-lg p-10 my-20 w-3/4"
+      class="flex justify-center items-center mx-auto rounded-md bg-gray-100 shadow-lg p-10 my-20 w-3/4 dark:bg-gray-400"
     >
       <li class="w-full">
         <!-- Task heading -->
@@ -330,10 +330,6 @@ async function remove(item) {
   @apply h-10 w-36 max-w-xs text-white font-bold py-2 px-4 rounded;
 }
 
-.social-media-a {
-  @apply rounded hover:border-2 hover:border-green-700;
-}
-
 .social-media-logo {
   @apply h-10 w-10 m-2;
 }
@@ -429,5 +425,13 @@ async function remove(item) {
     url("../assets/todo-cover.jpeg");
   background-size: cover;
   background-position: center center;
+}
+
+.cover-pic-dark {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.2)
+    ),
+    url("../assets/todo-cover.jpeg");;
 }
 </style>

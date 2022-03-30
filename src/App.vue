@@ -1,10 +1,10 @@
 <template>
-  <section class="min-h-full box-border">
-    <Nav />
-    <router-view class="app-main" />
-    <!-- your routes will load inside of these tags -->
-  </section>
-  <Footer />
+    <section class="min-h-full box-border dark:bg-zinc-800">
+      <Nav />
+      <router-view class="app-main" />
+      <!-- your routes will load inside of these tags -->
+    </section>
+    <Footer />
 </template>
 
 <script setup>

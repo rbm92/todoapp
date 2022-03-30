@@ -1,6 +1,6 @@
 <template>
   <header
-    class="static md:sticky md:top-0 w-full flex justify-around bg-green-300"
+    class="static md:sticky md:top-0 w-full flex justify-around bg-green-300 dark:bg-green-500"
   >
     <nav class="p-5 flex flex-col gap-x-48 gap-y-10 items-center sm:flex-row">
       <a
@@ -36,7 +36,7 @@
 
         <!-- <li>
           <img
-            @click="toggleDarkMode"
+            @click="toggleDark"
             class="w-8"
             src="../assets/dark.svg"
             alt="dark mode"
@@ -48,6 +48,7 @@
 </template>
 
 <script setup>
+// import isDark from '../App.vue'
 import { ref } from "vue";
 import { supabase } from "../supabase";
 import { useRouter } from "vue-router";
@@ -63,12 +64,7 @@ const user = computed(() => useUserStore().user);
 // Setup ref to router
 const redirect = useRouter();
 
-// const darkMode = ref(false);
-
-// function toggleDarkMode() {
-//   darkMode.value = !darkMode.value;
-//   console.log(darkMode.value);
-// }
+const isDark = ref(false);
 
 // Logout function
 async function signOut() {
@@ -76,10 +72,13 @@ async function signOut() {
   useUserStore().user = null;
   redirect.push({ path: "/auth" });
 }
+
+// function toggleDark() {
+//   console.log(isDark.value);
+//   isDark.value = !isDark.value;
+//   console.log(isDark.value);
+// }
 </script>
 
 <style>
-.darkMode {
-  color: white;
-}
 </style>

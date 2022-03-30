@@ -16,7 +16,7 @@
     >
       <button
         v-if="!item.is_complete"
-        class="block w-full sm:inline sm:w-20 bg-btn bg-done btn-template bg-green-400 hover:bg-green-500"
+        class="block w-full sm:inline sm:w-20 bg-btn bg-done btn-template bg-green-500 hover:bg-green-600"
         @click="toggleTodo"
       ></button>
       <button

@@ -20,7 +20,7 @@
     >
       <input
         type="file"
-        class="mx-auto w-full sm:w-80"
+        class="mx-auto w-3/4 sm:w-80 dark:text-white"
         @change="handleFileChange"
         id="upload-avatar"
         name="avatar"
@@ -28,7 +28,7 @@
       />
       <button
         @click="uploadFile"
-        class="font-mono block w-full sm:w-60 mx-auto my-10 btn-template bg-sky-400 hover:bg-sky-500"
+        class="font-mono block w-full sm:w-60 mx-auto my-10 btn-template bg-sky-500 hover:bg-sky-600"
       >
         Upload
       </button>
@@ -36,7 +36,7 @@
 
     <router-link to="/">
       <button
-        class="font-mono block w-full sm:w-60 mx-auto my-10 btn-template bg-green-400 hover:bg-green-500"
+        class="font-mono block w-full sm:w-60 mx-auto my-10 btn-template bg-green-500 hover:bg-green-600"
       >
         Back to Dashboard
       </button>
@@ -52,7 +52,7 @@
 
     <form
       @submit.prevent="updateProfile"
-      class="max-w-screen-sm mx-auto w-3/4 p-10 flex flex-col gap-y-5 bg-gray-200 rounded-md shadow-lg my-10"
+      class="max-w-screen-sm mx-auto w-3/4 p-10 flex flex-col gap-y-5 bg-gray-200 rounded-md shadow-lg my-10 dark:bg-gray-500"
     >
       <div class="flex flex-col mb-2">
         <label for="username" class="mb-1 text-lg text-green-500"
@@ -131,7 +131,7 @@
 
       <button
         @submit="updateProfile"
-        class="block w-full sm:inline sm:w-48 font-mono mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-400 border-solid border-2 border-transparent hover:border-green-400 hover:bg-white hover:text-green-400"
+        class="block w-full sm:inline sm:w-48 font-mono mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-500 border-solid border-2 border-transparent hover:border-green-500 hover:bg-white hover:text-green-500"
       >
         Save Changes
       </button>
