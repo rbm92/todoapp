@@ -17,3 +17,6 @@ Ironhack Barcelona
 
 ## Deployment Site
 https://rbm-todoapp.netlify.app/
+
+## Presentation
+https://docs.google.com/presentation/d/1c8U4jxBTPTjqThYvFfwsPnMsuHPwit123wDwtKu0UR8/edit?usp=sharing

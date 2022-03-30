@@ -1,5 +1,5 @@
 <template>
-  <section class="max-w-screen-sm mx-auto">
+  <section class="w-full sm:w-3/4 mx-auto">
     <!-- Form wrapper -->
     <form
       @submit.prevent="signUp"
