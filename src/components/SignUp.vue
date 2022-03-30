@@ -1,35 +1,39 @@
 <template>
   <section class="max-w-screen-sm mx-auto">
-    <!-- Sign Up -->
+    <!-- Form wrapper -->
     <form
       @submit.prevent="signUp"
       class="p-10 flex flex-col bg-gray-200 rounded-md shadow-lg gap-y-5 dark:bg-gray-500"
     >
       <h1 class="text-3xl mb-5">Sign Up</h1>
+
+      <!-- Email -->
       <div class="flex flex-col mb-2">
         <label for="email" class="mb-1 text-lg">Email</label>
         <input
           type="text"
           placeholder="random@names.com"
           required
-          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-email focus:outline-none"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-email focus:outline-none dark:bg-gray-200"
           id="email"
           v-model="email"
         />
       </div>
+
+      <!-- Password -->
       <div class="flex flex-col mb-2">
-        <label for="password" class="mb-1 text-lg"
-          >Password</label
-        >
+        <label for="password" class="mb-1 text-lg">Password</label>
         <input
           type="password"
           required
           placeholder="avoid1234please"
-          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-pwd focus:outline-none"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-pwd focus:outline-none dark:bg-gray-200"
           id="password"
           v-model="password"
         />
       </div>
+
+      <!-- Confirm password -->
       <div class="flex flex-col mb-2">
         <label for="confirmedPassword" class="mb-1 text-lg"
           >Confirm Password</label
@@ -38,7 +42,7 @@
           type="password"
           required
           placeholder="proveyouarehuman"
-          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-check focus:outline-none"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-check focus:outline-none dark:bg-gray-200"
           id="confirmPassword"
           v-model="confirmPassword"
         />
@@ -105,7 +109,7 @@ async function signUp() {
 
   try {
     await useUserStore().signUp(email.value, password.value);
-    if (error) throw error;
+    // if (error) throw error;
     okMsg.value = "A confirmation message has been sent to your email";
     setTimeout(() => {
       okMsg.value = null;

@@ -1,31 +1,33 @@
 <template>
   <section class="max-w-screen-sm mx-auto">
-    <!-- Sign In -->
+    <!-- Form wrapper -->
     <form
       @submit.prevent="signIn"
       class="mx-auto my-10 p-10 flex flex-col bg-gray-200 rounded-md shadow-lg gap-y-5 dark:bg-gray-500"
     >
       <h1 class="text-3xl mb-5 dark">Sign In</h1>
+
+      <!-- Email -->
       <div class="flex flex-col mb-2">
         <label for="email" class="mb-1 text-lg">Email</label>
         <input
           type="text"
           placeholder="random@names.com"
           required
-          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-email focus:outline-none"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-email focus:outline-none dark:bg-gray-200"
           id="email"
           v-model="email"
         />
       </div>
+
+      <!-- Password -->
       <div class="flex flex-col mb-2">
-        <label for="password" class="mb-1 text-lg"
-          >Password</label
-        >
+        <label for="password" class="mb-1 text-lg">Password</label>
         <input
           type="password"
           required
           placeholder="avoid1234please"
-          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-pwd focus:outline-none"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-pwd focus:outline-none dark:bg-gray-200"
           id="password"
           v-model="password"
         />
@@ -38,12 +40,17 @@
         Sign In
       </button>
 
-      <p v-if="okMsg" class="p-5 rounded-md text-center bg-gray-100 font-bold font-mono text-green-400">{{ okMsg }}</p>
+      <p
+        v-if="okMsg"
+        class="p-5 rounded-md text-center bg-gray-100 dark:bg-gray-300 font-bold font-mono text-green-400"
+      >
+        {{ okMsg }}
+      </p>
 
       <!-- Error Handling -->
       <div v-if="errorMsg">
         <p
-          class="p-5 rounded-md text-center bg-gray-100 font-bold font-mono text-red-600 italic"
+          class="p-5 rounded-md text-center bg-gray-100 dark:bg-gray-300font-bold font-mono text-red-600 italic"
         >
           {{ errorMsg }}
         </p>
@@ -105,8 +112,8 @@ async function resetPassword() {
   errorMsg.value = null;
   okMsg.value = "A confirmation message has been sent to your email";
   setTimeout(() => {
-      okMsg.value = null;
-    }, 3000);
+    okMsg.value = null;
+  }, 3000);
 }
 </script>
 

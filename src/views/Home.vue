@@ -20,10 +20,9 @@
     <!-- Adding a new task -->
     <NewTask @childAddTodo="addTodo" />
 
-    <!-- <h2 class="text-3xl font-bold mt-10 ml-10">List of Tasks</h2> -->
     <!-- Buttons controlling all tasks -->
     <div
-      class="flex flex-col items-center sm:items-start sm:flex-row w-3/4 gap-10 my-20 rounded-md bg-gray-100 shadow-lg p-10 mx-auto justify-center dark:bg-gray-400"
+      class="flex flex-col items-center sm:items-start sm:flex-row w-3/4 gap-10 rounded-md bg-gray-100 shadow-lg p-10 mx-auto justify-center dark:bg-gray-400 mb-20"
     >
       <!-- Select All -->
       <div class="flex flex-col gap-1 w-full">
@@ -124,11 +123,11 @@
     <!-- Remove All dialog -->
     <div
       v-if="removeAllDialog"
-      class="flex flex-col sm:flex-row w-3/4 mx-auto rounded-md bg-gray-100 shadow-lg px-12 py-5 gap-5 items-center"
+      class="flex flex-col sm:flex-row w-3/4 mx-auto rounded-md bg-gray-100 dark:bg-gray-300 shadow-lg px-12 py-5 gap-5 items-center mb-10"
     >
       <!-- Alert message wrapper -->
       <div class="w-full flex items-center justify-center gap-x-5">
-        <input class="bg-gray-100 bg-icon bg-danger w-10" type="text" />
+        <input class="bg-gray-100 dark:bg-gray-300 bg-icon bg-danger w-10" type="text" />
         <p class="font-mono text-red-600 italic font-bold w-2/3">
           You're about to remove all tasks, are you sure?
         </p>
@@ -180,9 +179,6 @@ import { useRouter } from "vue-router";
 let tasks = ref([]);
 let removeAllDialog = ref(false);
 
-// Printing date
-// console.log(tasks.value.inserted_at.split('T')[0]);
-
 // Getting tasks from supabase
 async function getTasks() {
   tasks.value = await useTaskStore().fetchTasks();
@@ -190,6 +186,7 @@ async function getTasks() {
 
 getTasks();
 
+// Getting profile info
 const profiles = ref([]);
 
 async function getProfile() {
@@ -205,6 +202,7 @@ const dropdownSelect = ref(false);
 const dropdownFilter = ref(false);
 const dropdownSort = ref(false);
 
+// Variable for redirections
 const redirect = useRouter();
 
 // Global Functions
@@ -228,14 +226,12 @@ async function resetFilters() {
 }
 
 async function markAllDone() {
-  // tasks.value.forEach((task) => (task.completed = true));
   await useTaskStore().allDone();
   getTasks();
   resetDropdowns();
 }
 
 async function markAllUndone() {
-  // tasks.value.forEach((task) => (task.completed = false));
   await useTaskStore().allUndone();
   getTasks();
   resetDropdowns();
@@ -247,8 +243,6 @@ function confirmRemoveAll() {
 }
 
 async function removeAll() {
-  // tasks.value.length = 0;
-  // await useTaskStore().deleteTask();
   await getTasks();
   tasks.value.forEach(async (task) => {
     await remove(task);
@@ -264,7 +258,6 @@ async function sortTitle() {
 }
 
 async function sortDate() {
-  // getTasks();
   const sortDate = await useTaskStore().sortDate();
   tasks.value = sortDate;
   console.log(tasks.value);
@@ -289,19 +282,11 @@ function toggleDropdownSort() {
 
 // Individual Functions
 async function addTodo(newTodo) {
-  // tasks.value.push({
-  //   title: newTodo,
-  //   completed: false,
-  // }); // saves input to pending
-
   await useTaskStore().addTask(newTodo);
   getTasks();
 }
 
 async function toggleTodo(item) {
-  // const index = tasks.value.indexOf(item);
-  // console.log(item.completed);
-  // tasks.value[index].completed = !tasks.value[index].completed;
   const toggleComplete = !item.is_complete;
   const toggleId = item.id;
   await useTaskStore().toggleDone(toggleComplete, toggleId);
@@ -309,8 +294,6 @@ async function toggleTodo(item) {
 }
 
 async function edit(item) {
-  // const index = tasks.value.indexOf(item.oldValue);
-  // tasks.value[index].title = item.newValue;
   const newTitle = item.newValue;
   const editId = item.oldValue.id;
   await useTaskStore().editTask(newTitle, editId);
@@ -318,14 +301,20 @@ async function edit(item) {
 }
 
 async function remove(item) {
-  // const index = tasks.value.indexOf(item);
-  // tasks.value.splice(index, 1);
   await useTaskStore().deleteTask(item.id);
   getTasks();
 }
 </script>
 
 <style>
+/* Template styles */
+.cover-pic {
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)),
+    url("../assets/todo-cover.jpeg");
+}
+
 .btn-template {
   @apply h-10 w-36 max-w-xs text-white font-bold py-2 px-4 rounded;
 }
@@ -334,6 +323,7 @@ async function remove(item) {
   @apply h-10 w-10 m-2;
 }
 
+/* Icons on inputs */
 .bg-icon {
   background-repeat: no-repeat;
   background-position: 10px;
@@ -415,12 +405,5 @@ async function remove(item) {
 .bg-sort {
   background-image: url("../assets/sort.svg");
   background-position: 20px;
-}
-
-.cover-pic {
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.5)),
-    url("../assets/todo-cover.jpeg");
 }
 </style>

@@ -1,22 +1,13 @@
 <template>
   <section class="max-w-screen-sm mx-auto">
-    <!-- Sign Up -->
+    <!-- Form Wrapper -->
     <form
       @submit.prevent="updatePassword"
       class="p-10 flex flex-col bg-gray-200 rounded-md shadow-lg gap-y-5 dark:bg-gray-500"
     >
       <h1 class="text-3xl mb-5">Update Password</h1>
-      <!-- <div class="flex flex-col mb-2">
-        <label for="email" class="mb-1 text-lg text-green-500">Email</label>
-        <input
-          type="text"
-          placeholder="random@names.com"
-          required
-          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-email focus:outline-none"
-          id="email"
-          v-model="email"
-        />
-      </div> -->
+      
+      <!-- New Password -->
       <div class="flex flex-col mb-2">
         <label for="password" class="mb-1 text-lg"
           >New Password</label
@@ -25,11 +16,13 @@
           type="password"
           required
           placeholder="avoid1234please"
-          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-pwd focus:outline-none"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-pwd focus:outline-none dark:bg-gray-200"
           id="password"
           v-model="password"
         />
       </div>
+      
+      <!-- Confirm New Password -->
       <div class="flex flex-col mb-2">
         <label for="confirmedPassword" class="mb-1 text-lg"
           >Confirm New Password</label
@@ -38,7 +31,7 @@
           type="password"
           required
           placeholder="proveyouarehuman"
-          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-check focus:outline-none"
+          class="p-2 pl-12 text-gray-500 rounded bg-icon bg-check focus:outline-none dark:bg-gray-200"
           id="confirmPassword"
           v-model="confirmPassword"
         />

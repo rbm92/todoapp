@@ -3,13 +3,19 @@
   <div
     class="flex flex-col sm:flex-row gap-5 items-center justify-center my-10"
   >
+    <!-- Task -->
     <p
       class="text-center font-mono w-full sm:w-1/2"
       :class="{ taskDone: item.is_complete }"
     >
       {{ item.title }}
     </p>
-    <p class="text-center font-mono w-full sm:w-1/4">{{ item.inserted_at.split('T')[0] }}</p>
+
+    <!-- Added At -->
+    <p class="text-center font-mono w-full sm:w-1/4">
+      {{ item.inserted_at.split("T")[0] }}
+    </p>
+
     <!-- Button wrapper -->
     <div
       class="w-full sm:w-1/2 flex flex-col sm:flex-row gap-2 items-center justify-center"
@@ -45,11 +51,11 @@
       <input
         type="text"
         placeholder="nothing is permanent"
-        class="block w-80 sm:inline sm:w-3/4 p-2 pl-12 text-gray-500 rounded bg-icon bg-edit"
+        class="block w-80 sm:inline sm:w-3/4 p-2 pl-12 text-gray-500 dark:bg-gray-200 rounded bg-icon bg-edit"
         v-model="editTodo"
       />
       <button
-        class="block w-full sm:inline sm:w-20 bg-btn bg-done btn-template bg-green-400 hover:bg-green-500"
+        class="block w-full sm:inline sm:w-20 bg-btn bg-done btn-template bg-green-500 hover:bg-green-600"
         @click.prevent="edit"
       ></button>
       <p v-if="empty" class="text-red-600 font-bold">
@@ -61,11 +67,11 @@
   <form
     action=""
     v-if="removeDialog"
-    class="flex flex-col sm:flex-row items-center justify-around bg-white rounded p-5 gap-y-5 gap-x-10"
+    class="flex flex-col sm:flex-row items-center justify-around bg-white dark:bg-gray-200 rounded p-5 gap-y-5 gap-x-10"
   >
     <!-- Alert message wrapper -->
     <div class="sm:w-full flex items-center justify-center gap-x-5">
-      <input class="bg-icon bg-danger w-10" type="text" />
+      <input class="bg-icon dark:bg-gray-200 bg-danger w-10" type="text" />
       <p class="w-4/5 font-mono font-bold text-red-600 italic">Remove task?</p>
     </div>
 

@@ -21,12 +21,6 @@ const router = useRouter();
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 
-// Check if user is logged in
-// const checkUser = useUserStore.fetchUser();
-
-// If user does not exist, need to make app ready
-// if (!checkUser) appReady.value = true;
-
 onMounted(async () => {
   const appReady = ref(null);
   try {
