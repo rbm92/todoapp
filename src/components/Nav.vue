@@ -8,7 +8,7 @@
         class="flex flex-col sm:flex-row items-center gap-x-10 gap-y-5"
       >
         <img class="w-16" src="../assets/logo.svg" alt="logo" />
-        <h1 class="text-2xl font-mono">2DoVu</h1>
+        <h1 class="text-2xl font-mono">2Do</h1>
       </a>
       <ul
         class="flex flex-col sm:flex-row items-center justify-end gap-x-10 gap-y-5"
