@@ -6,13 +6,7 @@
       <!-- Profile wrapper -->
       <img
         :src="profiles.avatar_url"
-        class="w-48 h-48 rounded-full border-2 border-green-400 shadow-lg"
-        alt="avatar"
-      />
-      <img
-        @click="getProfileImg"
-        :src="avatarImg"
-        class="w-48 h-48 rounded-full border-2 border-green-400 shadow-lg"
+        class="w-48 h-48 rounded-full border-2 border-green-400 shadow-lg object-cover"
         alt="avatar"
       />
 
@@ -22,11 +16,11 @@
     </div>
 
     <div
-      class="mx-auto w-3/4 items-center flex flex-col sm:flex-row justify-around gap-x-10 gap-y-5"
+      class="mx-auto w-3/4 items-center flex flex-col sm:flex-row justify-around gap-y-5"
     >
-      <label for="upload-avatar">Choose a profile picture:</label>
       <input
         type="file"
+        class="mx-auto w-full sm:w-80"
         @change="handleFileChange"
         id="upload-avatar"
         name="avatar"
@@ -115,9 +109,9 @@
           ></button>
         </div>
       </div>
-      <div class="flex flex-col mb-2">
+      <!-- <div class="flex flex-col mb-2">
         <label for="avatar" class="mb-1 text-lg text-green-500">Avatar</label>
-        <!-- Input wrapper -->
+        Input wrapper
         <div class="flex items-center">
           <input
             type="text"
@@ -133,13 +127,13 @@
             @click.prevent="toggleAvatar"
           ></button>
         </div>
-      </div>
+      </div> -->
 
       <button
         @submit="updateProfile"
         class="block w-full sm:inline sm:w-48 font-mono mt-5 py-2 px-6 rounded self-start text-white font-bold bg-green-400 border-solid border-2 border-transparent hover:border-green-400 hover:bg-white hover:text-green-400"
       >
-        Update Profile
+        Save Changes
       </button>
       <!-- Error Handling -->
       <p
@@ -190,7 +184,9 @@ const confirmNewPassword = ref(null);
 const okMsg = ref(null);
 const errorMsg = ref(null);
 
+// Avatar variables
 let avatarImg = ref(null);
+let path = ref(null);
 
 const redirect = useRouter();
 
@@ -208,18 +204,30 @@ function toggleAvatar() {
 
 function handleFileChange(event) {
   selectedFile.value = event.target.files[0];
+  console.log(selectedFile.value.name);
 }
 
 async function uploadFile() {
-  await useProfileStore().uploadFile(selectedFile.value);
+  const uuid = self.crypto.randomUUID().split("-")[0];
+  path.value = uuid;
+  await useProfileStore().uploadFile(uuid, selectedFile.value);
+
   getProfileImg();
 }
 
 async function getProfileImg() {
-  const imgUrl = await useProfileStore().getFile();
-  avatarImg = imgUrl;
-  console.log(avatarImg);
+  const imgUrl = await useProfileStore().getFile(path.value);
+  profiles.value.avatar_url = imgUrl;
 }
+
+// async function updateFile() {
+//   // getProfileImg();
+//   const fullPath = profiles.value.avatar_url;
+//   console.log(fullPath);
+//   const currentFile = fullPath.split('avatars/')[1];
+//   console.log(currentFile);
+//   await useProfileStore().updateFile(currentFile, selectedFile.value);
+// }
 
 async function updateProfile() {
   await useProfileStore().updateProfile(

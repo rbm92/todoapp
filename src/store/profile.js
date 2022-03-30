@@ -59,12 +59,12 @@ export const useProfileStore = defineStore("profiles", {
                 console.log(error);
             }
         },
-        async uploadFile(avatar) {
+        async updateFile(path, avatar) {
             try {
                 const { data, error } = await supabase
                     .storage
                     .from('avatars')
-                    .upload('public/avatar1.png', avatar, {
+                    .update(path, avatar, {
                         cacheControl: '3600',
                         upsert: false
                     })
@@ -75,12 +75,29 @@ export const useProfileStore = defineStore("profiles", {
             }
             // await this.getFile();
         },
-        async getFile() {
+        async uploadFile(id, avatar) {
+
+            try {
+                const { data, error } = await supabase
+                    .storage
+                    .from('avatars')
+                    .upload('public/' + id + '.png', avatar, {
+                        cacheControl: '3600',
+                        upsert: false
+                    })
+                if (error) throw error
+            } catch (error) {
+                console.log(error);
+                return { error: error }
+            }
+            // await this.getFile();
+        },
+        async getFile(id) {
             try {
                 const { publicURL, error } = await supabase
                     .storage
                     .from('avatars')
-                    .getPublicUrl('public/avatar1.png');
+                    .getPublicUrl('public/' + id + '.png');
                 if (error) throw error
                 return publicURL;
             } catch (error) {
