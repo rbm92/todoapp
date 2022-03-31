@@ -1,7 +1,7 @@
 <template>
   <!-- Item wrapper -->
   <div
-    class="flex flex-col sm:flex-row gap-5 items-center justify-center my-10"
+    class="bg-slate-50 dark:bg-gray-300 rounded-xl shadow-xl p-10 flex flex-col sm:flex-row gap-5 items-center justify-center my-10"
   >
     <!-- Task -->
     <p

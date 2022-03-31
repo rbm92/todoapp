@@ -12,7 +12,7 @@
 
     <router-link to="/profile">
       <button
-        class="font-mono block w-full sm:w-60 mx-auto btn-template text-slate-100 bg-green-500 hover:bg-green-600"
+        class="font-mono block w-5/6 sm:w-60 mx-auto my-20 p-3 rounded text-white font-bold bg-green-500 hover:bg-green-600"
       >
         Update Profile
       </button>
@@ -22,7 +22,7 @@
 
     <!-- Buttons controlling all tasks -->
     <div
-      class="flex flex-col items-center sm:items-start sm:flex-row w-3/4 gap-10 rounded-md bg-gray-100 shadow-lg p-10 mx-auto justify-center dark:bg-gray-400 mb-20"
+      class="w-11/12 sm:w-3/4 flex flex-col items-center sm:items-start sm:flex-row gap-10 rounded-md bg-gray-100 shadow-lg p-10 mx-auto justify-center dark:bg-gray-400 mb-20"
     >
       <!-- Select All -->
       <div class="flex flex-col gap-1 w-full">
@@ -133,7 +133,7 @@
         </p>
       </div>
       <button
-        class="block w-full sm:inline sm:w-20 bg-btn bg-done btn-template bg-green-400 hover:bg-green-500"
+        class="block w-full sm:inline sm:w-20 bg-btn bg-done btn-template bg-green-500 hover:bg-green-600"
         @click.prevent="removeAll"
       ></button>
       <button
@@ -142,7 +142,7 @@
       ></button>
     </div>
     <ul
-      class="flex justify-center items-center mx-auto rounded-md bg-gray-100 shadow-lg p-10 w-3/4 dark:bg-gray-400"
+      class="flex justify-center items-center mx-auto rounded-md bg-gray-100 shadow-lg p-10 w-11/12 sm:w-3/4 dark:bg-gray-400 pb-5"
     >
       <li class="w-full">
         <!-- Task heading -->
@@ -150,7 +150,7 @@
           <p
             class="w-full text-center sm:text-left sm:w-1/3 font-mono font-bold text-2xl"
           >
-            Task
+            Tasks
           </p>
           <p class="font-mono font-bold text-2xl hidden sm:block">Added at</p>
         </div>
@@ -272,12 +272,18 @@ function resetDropdowns() {
 
 function toggleDropdownSelect() {
   dropdownSelect.value = !dropdownSelect.value;
+  dropdownFilter.value = false;
+  dropdownSort.value = false;
 }
 function toggleDropdownFilter() {
   dropdownFilter.value = !dropdownFilter.value;
+  dropdownSelect.value = false;
+  dropdownSort.value = false;
 }
 function toggleDropdownSort() {
   dropdownSort.value = !dropdownSort.value;
+  dropdownFilter.value = false;
+  dropdownSelect.value = false;
 }
 
 // Individual Functions

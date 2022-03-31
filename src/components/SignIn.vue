@@ -3,7 +3,7 @@
     <!-- Form wrapper -->
     <form
       @submit.prevent="signIn"
-      class="mx-auto my-10 p-10 flex flex-col bg-gray-200 rounded-md shadow-lg gap-y-5 dark:bg-gray-500"
+      class="mx-auto my-10 p-10 pb-5 flex flex-col bg-gray-200 rounded-md shadow-lg gap-y-5 dark:bg-gray-500"
     >
       <h1 class="text-3xl mb-5 dark">Sign In</h1>
 
@@ -65,10 +65,12 @@
         </div>
       </div>
 
+      <div class="flex flex-col sm:flex-row gap-x-5 gap-y-1 items-center mx-auto">
       <p class="font-mono text-center">
         Don't have an account?
-        <Router :route="route" :redirectBtn="redirectBtn" />
       </p>
+        <Router :route="route" :redirectBtn="redirectBtn" />
+        </div>
     </form>
   </section>
 </template>

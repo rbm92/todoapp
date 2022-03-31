@@ -11,16 +11,15 @@
       <div
         class="w-full sm:w-1/2 items-center flex flex-col justify-around gap-y-5"
       >
-
         <label
           for="avatar"
           class="italic block border-black rounded text-center p-2 mx-auto w-3/4 cursor-pointer sm:w-60 dark:border-white dark:text-white"
         >
-        <img
-          :src="profiles.avatar_url"
-          class="w-48 h-48 mx-auto mb-3 rounded-full border-2 border-green-400 shadow-lg object-cover"
-          alt="avatar"
-        />
+          <img
+            :src="profiles.avatar_url"
+            class="w-48 h-48 mx-auto mb-3 rounded-full border-2 border-green-400 shadow-lg object-cover"
+            alt="avatar"
+          />
           <input
             type="file"
             class="hidden mx-auto"
@@ -36,6 +35,7 @@
         >
           Upload
         </button>
+        <p class="text-red-500 font-mono font-bold">{{ errorFile }}</p>
       </div>
     </div>
 
@@ -44,7 +44,7 @@
     <!-- // Back to Dashboard button -->
     <router-link to="/">
       <button
-        class="font-mono block w-full sm:w-60 mx-auto my-20 btn-template bg-green-500 hover:bg-green-600"
+        class="font-mono block w-5/6 sm:w-60 mx-auto my-20 p-3 rounded text-white font-bold bg-green-500 hover:bg-green-600"
       >
         Back to Dashboard
       </button>
@@ -61,7 +61,7 @@
     <!-- Info to Update Wrapper -->
     <form
       @submit.prevent="updateProfile"
-      class="max-w-screen-sm mx-auto w-3/4 p-10 flex flex-col gap-y-5 bg-gray-200 rounded-md shadow-lg dark:bg-gray-500"
+      class="mx-auto w-11/12 sm:w-3/4 p-10 flex flex-col gap-y-5 bg-gray-200 rounded-md shadow-lg dark:bg-gray-500"
     >
       <div class="flex flex-col mb-2">
         <label for="username" class="mb-1 text-lg text-green-500"
@@ -174,6 +174,7 @@ const confirmNewPassword = ref(null);
 // Messages
 const okMsg = ref(null);
 const errorMsg = ref(null);
+const errorFile = ref(null);
 
 // Avatar variables
 let avatarImg = ref(null);
@@ -201,7 +202,17 @@ function handleFileChange(event) {
 async function uploadAvatar() {
   const uuid = self.crypto.randomUUID().split("-")[0];
   path.value = uuid;
-  await useProfileStore().uploadFile(uuid, selectedFile.value);
+  try {
+    if (error) throw error;
+    await useProfileStore().uploadFile(uuid, selectedFile.value);
+  } catch (error) {
+    errorFile.value = "File was not selected";
+    console.log(profiles.value.avatar_url);
+    setTimeout(() => {
+      errorFile.value = null;
+    }, 3000);
+    return;
+  };
   getProfileImg();
 }
 

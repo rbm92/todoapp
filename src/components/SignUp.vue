@@ -63,14 +63,15 @@
       <!-- Error Handling -->
       <p
         v-if="errorMsg"
-        class="p-5 mt-10 rounded-md text-center bg-gray-100 font-bold font-mono text-red-600 italic"
+        class="p-5 mt-10 rounded-md text-center bg-gray-100 dark:bg-gray-300 font-bold font-mono text-red-600 italic"
       >
         {{ errorMsg }}
       </p>
-      <p class="font-mono mt-10 text-center">
-        Already have an account?
+
+      <div class="flex flex-col sm:flex-row gap-x-5 gap-y-1 items-center mx-auto">
+        <p class="font-mono text-center">Already have an account?</p>
         <Router :route="route" :redirectBtn="redirectBtn" />
-      </p>
+      </div>
     </form>
   </section>
 </template>
@@ -109,7 +110,7 @@ async function signUp() {
 
   try {
     await useUserStore().signUp(email.value, password.value);
-    // if (error) throw error;
+    if (error) throw error;
     okMsg.value = "A confirmation message has been sent to your email";
     setTimeout(() => {
       okMsg.value = null;
