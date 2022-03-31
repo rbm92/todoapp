@@ -50,7 +50,7 @@
       <!-- Error Handling -->
       <div v-if="errorMsg">
         <p
-          class="p-5 rounded-md text-center bg-gray-100 dark:bg-gray-300font-bold font-mono text-red-600 italic"
+          class="p-5 rounded-md text-center bg-gray-100 dark:bg-gray-300 font-bold font-mono text-red-600 italic"
         >
           {{ errorMsg }}
         </p>

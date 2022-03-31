@@ -1,44 +1,45 @@
 <template>
   <section class="pt-10 pb-20">
     <div
-      class="w-3/4 mx-auto my-10 flex flex-col sm:flex-row items-center justify-around gap-y-5"
+      class="w-3/4 mx-auto my-10 flex flex-col sm:flex-row items-center justify-between gap-y-5"
     >
       <!-- Profile wrapper -->
-      <img
-        :src="profiles.avatar_url"
-        class="w-48 h-48 rounded-full border-2 border-green-400 shadow-lg object-cover"
-        alt="avatar"
-      />
-
       <p class="font-mono text-3xl font-bold text-green-500">
         {{ profiles.username }}
       </p>
+
+      <div
+        class="w-full sm:w-1/2 items-center flex flex-col justify-around gap-y-5"
+      >
+
+        <label
+          for="avatar"
+          class="italic block border-black rounded text-center p-2 mx-auto w-3/4 cursor-pointer sm:w-60 dark:border-white dark:text-white"
+        >
+        <img
+          :src="profiles.avatar_url"
+          class="w-48 h-48 mx-auto mb-3 rounded-full border-2 border-green-400 shadow-lg object-cover"
+          alt="avatar"
+        />
+          <input
+            type="file"
+            class="hidden mx-auto"
+            @change="handleFileChange"
+            id="avatar"
+            name="avatar"
+            accept="image/png, image/jpeg"
+          />Update your profile pic</label
+        >
+        <button
+          @click="uploadAvatar"
+          class="font-mono block w-full sm:w-60 mx-auto btn-template bg-sky-500 hover:bg-sky-600"
+        >
+          Upload
+        </button>
+      </div>
     </div>
 
     <!-- Upload a file Wrapper -->
-    <div
-      class="mx-auto w-3/4 items-center flex flex-col sm:flex-row justify-around gap-y-5"
-    >
-      <label
-        for="avatar"
-        class="block border border-black rounded text-center p-2 mx-auto w-3/4 cursor-pointer sm:w-60 dark:border-white dark:text-white"
-      >
-        <input
-          type="file"
-          class="hidden"
-          @change="handleFileChange"
-          id="avatar"
-          name="avatar"
-          accept="image/png, image/jpeg"
-        />Select a file</label
-      >
-      <button
-        @click="uploadFile"
-        class="font-mono block w-full sm:w-60 mx-auto btn-template bg-sky-500 hover:bg-sky-600"
-      >
-        Upload
-      </button>
-    </div>
 
     <!-- // Back to Dashboard button -->
     <router-link to="/">
@@ -107,7 +108,7 @@
             :disabled="disabledWebsite"
             required
             placeholder="add your website"
-            class="w-full p-2 pl-12 text-gray-500 rounded bg-icon bg-website focus:outline-none disabled:bg-slate-300"
+            class="w-4/5 p-2 pl-12 text-gray-500 rounded bg-icon bg-website focus:outline-none disabled:bg-slate-300"
             id="website"
             v-model="profiles.website"
           />
@@ -194,14 +195,13 @@ function toggleAvatar() {
 
 function handleFileChange(event) {
   selectedFile.value = event.target.files[0];
-  console.log(selectedFile.value.name);
+  // console.log(selectedFile.value.name);
 }
 
-async function uploadFile() {
+async function uploadAvatar() {
   const uuid = self.crypto.randomUUID().split("-")[0];
   path.value = uuid;
   await useProfileStore().uploadFile(uuid, selectedFile.value);
-
   getProfileImg();
 }
 
