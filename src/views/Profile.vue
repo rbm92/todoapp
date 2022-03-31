@@ -1,7 +1,7 @@
 <template>
   <section class="pt-10 pb-20">
     <div
-      class="w-3/4 mx-auto my-10 flex flex-col sm:flex-row items-center justify-between gap-y-5"
+      class="w-3/4 mx-auto my-10 flex flex-col sm:flex-row items-center justify-center gap-y-5"
     >
       <!-- Profile wrapper -->
       <p class="font-mono text-3xl font-bold text-green-500">

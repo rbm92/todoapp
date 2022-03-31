@@ -46,12 +46,12 @@
   <form action="">
     <div
       v-if="editDialog"
-      class="flex flex-col sm:flex-row gap-5 items-center justify-center mx-auto my-10"
+      class="bg-slate-100 dark:bg-gray-300 flex flex-col sm:flex-row gap-5 items-center justify-center mx-auto my-10 p-5 rounded-xl shadow-xl"
     >
       <input
         type="text"
         placeholder="nothing is permanent"
-        class="block w-80 sm:inline sm:w-3/4 p-2 pl-12 text-gray-500 dark:bg-gray-200 rounded bg-icon bg-edit"
+        class="block w-80 sm:inline sm:w-3/4 p-2 pl-12 text-gray-500 bg-slate-50 dark:bg-gray-200 rounded bg-icon bg-edit"
         v-model="editTodo"
       />
       <button
@@ -67,11 +67,11 @@
   <form
     action=""
     v-if="removeDialog"
-    class="flex flex-col sm:flex-row items-center justify-around bg-white dark:bg-gray-200 rounded p-5 gap-y-5 gap-x-10"
+    class="flex flex-col sm:flex-row items-center justify-around shadow-xl bg-slate-50 dark:bg-gray-200 rounded-xl p-5 gap-y-5 gap-x-10"
   >
     <!-- Alert message wrapper -->
     <div class="sm:w-full flex items-center justify-center gap-x-5">
-      <input class="bg-icon dark:bg-gray-200 bg-danger w-10" type="text" />
+      <input class="bg-icon bg-slate-50 dark:bg-gray-200 bg-danger w-10" type="text" />
       <p class="w-4/5 font-mono font-bold text-red-600 italic">Remove task?</p>
     </div>
 
@@ -125,6 +125,7 @@ function errHandl() {
 // Show Edit Dialog
 function toggleEdit() {
   editDialog.value = !editDialog.value;
+  removeDialog.value = false;
   editTodo.value = props.item.title;
 }
 
@@ -152,6 +153,7 @@ function edit() {
 
 function confirmRemove() {
   removeDialog.value = !removeDialog.value;
+  editDialog.value = false;
 }
 
 // Remove task
