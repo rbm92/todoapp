@@ -53,7 +53,7 @@
     <!-- Confirmation message -->
     <p
       v-if="okMsg"
-      class="mx-auto w-3/4 mt-2 p-5 rounded-md text-center bg-gray-100 dark:bg-gray-400 font-bold font-mono text-green-500 italic"
+      class="mx-auto w-3/4 mt-2 mb-10 p-5 rounded-md text-center bg-gray-100 dark:bg-gray-300 font-bold font-mono text-green-600 italic"
     >
       {{ okMsg }}
     </p>
@@ -200,19 +200,18 @@ function handleFileChange(event) {
 }
 
 async function uploadAvatar() {
-  const uuid = self.crypto.randomUUID().split("-")[0];
-  path.value = uuid;
-  try {
-    if (error) throw error;
-    await useProfileStore().uploadFile(uuid, selectedFile.value);
-  } catch (error) {
+  if (!selectedFile.value) {
     errorFile.value = "File was not selected";
-    console.log(profiles.value.avatar_url);
     setTimeout(() => {
       errorFile.value = null;
     }, 3000);
     return;
-  };
+  }
+
+  const uuid = self.crypto.randomUUID().split("-")[0];
+  path.value = uuid;
+  console.log(path.value);
+  await useProfileStore().uploadFile(uuid, selectedFile.value);
   getProfileImg();
 }
 
